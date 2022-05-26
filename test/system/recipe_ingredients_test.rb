@@ -15,8 +15,7 @@ class RecipeIngredientsTest < ApplicationSystemTestCase
     click_on "New recipe ingredient"
 
     fill_in "Quantity", with: @recipe_ingredient.quantity
-    fill_in "Receta", with: @recipe_ingredient.receta_id
-    fill_in "Unit", with: @recipe_ingredient.unit
+    fill_in "Recipe", with: @recipe_ingredient.recipe_id
     click_on "Create Recipe ingredient"
 
     assert_text "Recipe ingredient was successfully created"
@@ -28,8 +27,7 @@ class RecipeIngredientsTest < ApplicationSystemTestCase
     click_on "Edit this recipe ingredient", match: :first
 
     fill_in "Quantity", with: @recipe_ingredient.quantity
-    fill_in "Receta", with: @recipe_ingredient.receta_id
-    fill_in "Unit", with: @recipe_ingredient.unit
+    fill_in "Recipe", with: @recipe_ingredient.recipe_id
     click_on "Update Recipe ingredient"
 
     assert_text "Recipe ingredient was successfully updated"
