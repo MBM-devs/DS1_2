@@ -1,0 +1,1 @@
+ssh DS1_2@clados.ugr.es 'cd www/DS1_2; git pull'
