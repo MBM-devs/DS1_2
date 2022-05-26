@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_26_185511) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_26_191235) do
   create_table "followings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "follower", null: false
     t.bigint "followed", null: false
@@ -18,6 +18,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_26_185511) do
     t.datetime "updated_at", null: false
     t.index ["followed"], name: "followed_fk"
     t.index ["follower"], name: "follower_fk"
+  end
+
+  create_table "folowed_lists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_folowed_lists_on_list_id"
+    t.index ["user_id"], name: "index_folowed_lists_on_user_id"
+  end
+
+  create_table "lists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
   create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -39,4 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_26_185511) do
 
   add_foreign_key "followings", "users", column: "followed", name: "followed_fk"
   add_foreign_key "followings", "users", column: "follower", name: "follower_fk"
+  add_foreign_key "folowed_lists", "lists"
+  add_foreign_key "folowed_lists", "users"
+  add_foreign_key "lists", "users"
 end

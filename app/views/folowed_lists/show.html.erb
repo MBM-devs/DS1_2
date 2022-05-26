@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @folowed_list %>
+
+<div>
+  <%= link_to "Edit this folowed list", edit_folowed_list_path(@folowed_list) %> |
+  <%= link_to "Back to folowed lists", folowed_lists_path %>
+
+  <%= button_to "Destroy this folowed list", @folowed_list, method: :delete %>
+</div>
