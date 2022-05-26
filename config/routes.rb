@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :folowed_lists
+  resources :followed_lists
   resources :lists
   resources :followings
   resources :users

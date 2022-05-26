@@ -1,10 +1,10 @@
-<%= form_with(model: folowed_list) do |form| %>
-  <% if folowed_list.errors.any? %>
+<%= form_with(model: followed_list) do |form| %>
+  <% if followed_list.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(folowed_list.errors.count, "error") %> prohibited this folowed_list from being saved:</h2>
+      <h2><%= pluralize(followed_list.errors.count, "error") %> prohibited this followed_list from being saved:</h2>
 
       <ul>
-        <% folowed_list.errors.each do |error| %>
+        <% followed_list.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
