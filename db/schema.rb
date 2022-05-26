@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_26_192428) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_26_193812) do
   create_table "followed_lists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "list_id", null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_26_192428) do
   create_table "recipe_ingredients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.integer "quantity"
+    t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
@@ -66,6 +67,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_26_192428) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "shopping_lists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.boolean "comprado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_shopping_lists_on_ingredient_id"
+    t.index ["user_id"], name: "index_shopping_lists_on_user_id"
   end
 
   create_table "steps", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -91,5 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_26_192428) do
   add_foreign_key "followings", "users", column: "follower", name: "follower_fk"
   add_foreign_key "lists", "users"
   add_foreign_key "recipe_ingredients", "recipes"
+  add_foreign_key "shopping_lists", "ingredients"
+  add_foreign_key "shopping_lists", "users"
   add_foreign_key "steps", "recipes"
 end
