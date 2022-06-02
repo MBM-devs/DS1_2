@@ -1,2 +1,2 @@
-class Recipe < ApplicationRecord
+class User < ApplicationRecord
 end
