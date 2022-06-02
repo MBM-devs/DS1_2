@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api, defaults: { format: 'json' }  do
     namespace :v1 do
+      resources :shopping_lists
+      resources :recipe_ingredients
+      resources :steps
       resources :recipes
+      resources :ingredients
       resources :followed_lists
       resources :lists
       resources :followings
