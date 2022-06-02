@@ -1,7 +1,8 @@
 module Api
   module V1
     class ListsController < ApplicationController
-      before_action :set_list, only: %i[ show edit update destroy ]
+      skip_before_action :verify_authenticity_token
+      # before_action :set_list, only: %i[ show edit update destroy ]
 
       # GET /lists or /lists.json
       def index
