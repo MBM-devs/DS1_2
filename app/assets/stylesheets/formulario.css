@@ -1,0 +1,44 @@
+h1 {
+    width: 100%;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.formulario {
+    width: 100%;
+}
+
+input {
+    min-width: 80%;
+    max-width: 80%;
+    background-color: var(--form-background);
+    border: 2px solid var(--form-outline);
+    border-radius: 20px;
+    padding: 10px 10px 10px 20px;
+    margin: 10px auto 10px auto;
+}
+
+input:focus {
+    border-color: var(--primary-color);
+    outline: none !important;
+    transition-duration: 0.5s;
+}
+
+.button {
+    cursor: pointer;
+    min-width: fit-content;
+    max-width: fit-content;
+    height: fit-content;
+    color: white;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    border-radius: 20px;
+    outline: none !important;
+    border: 0px;
+    text-align: center;
+}
+
+.button:hover{
+    background-color: var(--secondary-color);
+    transition-duration: 0.5s;
+}
