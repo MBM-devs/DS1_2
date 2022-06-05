@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>DS12</title>
+    <title>Let's Cook It</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -17,7 +17,9 @@
         <div class="wrap-navbar-logo">
             <div class="wrap-div">
                 <div class="wrap-logo">
-                    <img src="/logo.png" alt="LetsCookIt">
+                    <%= link_to root_path do %>
+                        <%= image_tag "/logo.png" %>
+                    <% end %>
                 </div>
                 <nav>
                     <ul>

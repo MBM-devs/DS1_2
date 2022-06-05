@@ -51,7 +51,11 @@ body {
     align-content: center;
 }
 
-.wrap-logo img{
+.wrap-logo a{
+    margin: auto;
+}
+
+.wrap-logo a img{
     margin: auto;
     max-height: 40px;
 }
