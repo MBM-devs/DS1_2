@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :recipes_lists
       resources :shopping_lists
-          resources :steps
+      resources :recipe_ingredients
+      resources :steps
       resources :recipes
       resources :ingredients
       resources :followed_lists
