@@ -127,3 +127,20 @@ a:hover{
     color: var(--secondary-color);
     transition: 0.5s;
 }
+.navbar-section {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.navbar-section a {
+    color: white;
+    font-size: larger;
+}
+
+.navbar-section:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    transition: 0.5s;
+}

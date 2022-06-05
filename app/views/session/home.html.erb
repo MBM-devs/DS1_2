@@ -1,2 +1,5 @@
-<h1>Session#home</h1>
-<p>Find me in app/views/session/home.html.erb</p>
+<h1>Feed</h1>
+
+<% if logged_in? %>
+    <h1> <%= current_user.email %> </h1>
+<% end %>

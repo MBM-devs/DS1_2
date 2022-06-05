@@ -23,7 +23,12 @@
                 </div>
                 <nav>
                     <ul>
-                        <li></li>
+                        <% if logged_in? %>
+                            <li class="navbar-section"> <%= link_to "Cerrar sesión", "/logout" %> </li>
+                        <% else %>
+                            <li class="navbar-section"> <%= link_to "Iniciar sesión", "/login" %> </li>
+                            <li class="navbar-section"> <%= link_to "Regístrarse", "/register" %> </li>
+                        <% end %>
                     </ul>
                 </nav>
             </div>
