@@ -8,8 +8,7 @@ Rails.application.routes.draw do
    post 'logout', :to =>  'session#destroy'
    get 'logout', :to => 'session#destroy'
 
-  root  'home#index'
-  # root  'session#home'
+  root  'session#home'
 
   # resources
   resources :recipes_lists

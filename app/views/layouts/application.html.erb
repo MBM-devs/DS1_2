@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>DS12</title>
+    <title>Let's Cook It</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -17,11 +17,18 @@
         <div class="wrap-navbar-logo">
             <div class="wrap-div">
                 <div class="wrap-logo">
-                    <img src="/logo.png" alt="LetsCookIt">
+                    <%= link_to root_path do %>
+                        <%= image_tag "/logo.png" %>
+                    <% end %>
                 </div>
                 <nav>
                     <ul>
-                        <li></li>
+                        <% if logged_in? %>
+                            <li class="navbar-section"> <%= link_to "Cerrar sesión", logout_path %> </li>
+                        <% else %>
+                            <li class="navbar-section"> <%= link_to "Iniciar sesión", login_path %> </li>
+                            <li class="navbar-section"> <%= link_to "Regístrarse", register_path %> </li>
+                        <% end %>
                     </ul>
                 </nav>
             </div>
