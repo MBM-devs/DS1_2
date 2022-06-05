@@ -19,10 +19,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :recipes_lists
       resources :shopping_lists
-<<<<<<< HEAD
-=======
       resources :recipe_ingredients
->>>>>>> develop
       resources :steps
       resources :recipes
       resources :ingredients
