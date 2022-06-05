@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
   get 'home/index'
+
+   # Login and register
+   get 'register', :to => 'users#new'
+   get 'login', :to => 'session#login'
+   post 'login', :to =>  'session#create'
+   post 'logout', :to =>  'session#destroy'
+   get 'logout', :to => 'session#destroy'
+
   root  'home#index'
+  # root  'session#home'
+
+  # resources
   resources :recipes_lists
   resources :shopping_lists
   resources :recipe_ingredients
