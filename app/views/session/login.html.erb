@@ -1,5 +1,5 @@
 <h1>Iniciar sesión</h1>
-<%= form_with url: "/login", method: :post do |form| %>
+<%= form_with url: login_path, method: :post do |form| %>
   <div class="centrar">
     <%= form.text_field :username, placeholder:"Nombre de usuario"%>
   </div>
