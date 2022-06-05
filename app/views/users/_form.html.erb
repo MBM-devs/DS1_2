@@ -11,22 +11,16 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
+  <div class="centrar">
+    <%= form.text_field :username, placeholder:"Nombre de usuario"%>
   </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+  <div class="centrar">
+    <%= form.text_field :email, placeholder:"Correo electrónico" %>
   </div>
-
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.text_field :password %>
+  <div class="centrar">
+    <%= form.password_field :password, placeholder:"Contraseña"%>
   </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="centrar">
+    <%= form.submit value:"Crear cuenta", :class => 'button' %>
   </div>
 <% end %>
