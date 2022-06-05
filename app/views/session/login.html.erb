@@ -7,6 +7,9 @@
     <%= form.password_field :password, placeholder:"Contraseña"%>
   </div>
   <div class="centrar">
+      <p style="color: red"><%= notice %></p>
+  </div>
+  <div class="centrar">
     <%= form.submit value:"Iniciar sesión", :class => 'button' %>
   </div>
 <% end %>
