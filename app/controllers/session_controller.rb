@@ -1,6 +1,9 @@
 class SessionController < ApplicationController
   # No hace falta, ya que la acción home solo renderiza la página.
   def home
+    if session[:user_id] == nil
+      redirect_to login_path
+    end
   end
 
   # No hace falta, ya que la acción login solo renderiza la página.

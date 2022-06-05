@@ -12,13 +12,13 @@
   <% end %>
 
   <div class="centrar">
-    <%= form.text_field :username, placeholder:"Nombre de usuario"%>
+    <%= form.text_field :username, placeholder:"Nombre de usuario" %>
   </div>
   <div class="centrar">
-    <%= form.text_field :email, placeholder:"Correo electrónico" %>
+    <%= form.email_field :email, placeholder:"Correo electrónico" %>
   </div>
   <div class="centrar">
-    <%= form.password_field :password, placeholder:"Contraseña"%>
+    <%= form.password_field :password, placeholder:"Contraseña" %>
   </div>
   <div class="centrar">
     <%= form.submit value:"Crear cuenta", :class => 'button' %>
