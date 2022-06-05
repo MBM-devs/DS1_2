@@ -1,5 +1,8 @@
 :root{
     --primary-color: rgb(52, 160, 164);
+    --secondary-color: rgb(0, 106, 110);
+    --form-background: rgb(221, 221, 221);
+    --form-outline: rgb(163, 163, 163);
 }
 
 body {
@@ -50,7 +53,7 @@ body {
 
 .wrap-logo img{
     margin: auto;
-    max-height: 50px;
+    max-height: 40px;
 }
 
 nav {
@@ -97,10 +100,26 @@ nav ul li {
     display: block;
     margin: 0;
     padding: 0;
-    position: sticky;
 }
 
 .content {
     max-width: 100%;
     margin: 20px;
+}
+
+.centrar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--secondary-color);
+    transition: 0.5s;
 }
