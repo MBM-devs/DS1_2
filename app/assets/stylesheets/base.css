@@ -1,0 +1,106 @@
+:root{
+    --primary-color: rgb(52, 160, 164);
+}
+
+body {
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.wrap-navbar-main {
+    padding: 20px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.wrap-navbar-logo {
+    min-height: 58px;
+    max-height: 58px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.wrap-div {
+    min-width: 1102px;
+    max-width: 1102px;
+    display: flex;
+}
+
+.wrap-logo {
+    min-width: 251px;
+    max-width: 251px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.wrap-logo img{
+    margin: auto;
+    max-height: 50px;
+}
+
+nav {
+    min-width: 600px;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    padding: 20px;
+}
+
+.main-container {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: calc(100vh - 58px);
+}
+
+.central {
+    min-width: 600px;
+    max-width: 600px;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.lateral {
+    min-width: 251px;
+    max-width: 251px;
+    padding: 0px 12px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: sticky;
+}
+
+.content {
+    max-width: 100%;
+    margin: 20px;
+}

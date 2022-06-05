@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  root  'home#index'
   resources :recipes_lists
   resources :shopping_lists
   resources :recipe_ingredients
