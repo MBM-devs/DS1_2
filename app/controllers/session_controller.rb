@@ -22,8 +22,7 @@ class SessionController < ApplicationController
     end
   end
 
-  def destroy
-    User.find(session[:user_id]).destroy      
+  def destroy    
     session[:user_id] = nil         
     redirect_to root_path 
   end  
