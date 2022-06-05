@@ -24,10 +24,10 @@
                 <nav>
                     <ul>
                         <% if logged_in? %>
-                            <li class="navbar-section"> <%= link_to "Cerrar sesión", "/logout" %> </li>
+                            <li class="navbar-section"> <%= link_to "Cerrar sesión", logout_path %> </li>
                         <% else %>
-                            <li class="navbar-section"> <%= link_to "Iniciar sesión", "/login" %> </li>
-                            <li class="navbar-section"> <%= link_to "Regístrarse", "/register" %> </li>
+                            <li class="navbar-section"> <%= link_to "Iniciar sesión", login_path %> </li>
+                            <li class="navbar-section"> <%= link_to "Regístrarse", register_path %> </li>
                         <% end %>
                     </ul>
                 </nav>
