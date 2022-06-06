@@ -1,15 +1,17 @@
-<h1>Iniciar sesión</h1>
-<%= form_with url: "/login", method: :post do |form| %>
+<% if !logged_in? %>
+  <h1>Iniciar sesión</h1>
+  <%= form_with url: "/login", method: :post do |form| %>
+    <div class="centrar">
+      <%= form.text_field :username, placeholder:"Nombre de usuario"%>
+    </div>
+    <div class="centrar">
+      <%= form.password_field :password, placeholder:"Contraseña"%>
+    </div>
+    <div class="centrar">
+      <%= form.submit value:"Iniciar sesión", :class => 'button' %>
+    </div>
+  <% end %>
   <div class="centrar">
-    <%= form.text_field :username, placeholder:"Nombre de usuario"%>
-  </div>
-  <div class="centrar">
-    <%= form.password_field :password, placeholder:"Contraseña"%>
-  </div>
-  <div class="centrar">
-    <%= form.submit value:"Iniciar sesión", :class => 'button' %>
+    <%= link_to "¿Aún no tienes cuenta? Regístrate", register_path %>
   </div>
 <% end %>
-<div class="centrar">
-  <%= link_to "¿Aún no tienes cuenta? Regístrate", register_path %>
-</div>
