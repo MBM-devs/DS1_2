@@ -67,7 +67,7 @@
                                     <div><%= recipe.name %></div>
                                     <div><i class='fas fa-users'></i> <%= recipe.people %></div>
                                     <div><i class='fas fa-clock'></i> <%= recipe.duration %></div>
-                                    <div><i class='fas fa-star'></i> <%= recipe.duration %></div>
+                                    <div><i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_recipe(recipe.id)) %></div>
                                 </div>
                             </div>
                         </li>
@@ -102,18 +102,6 @@
             <h2>Seguidores</h2>
             <ul>
                 <% follower_from_user(@user_id).each do |follower| %>
-                    <div class="wrap-li">
-                        <li>
-                            <div class="wrap-imagen-info">
-                                <div class="imagen-perfil">
-                                    <%= follower.username[0].upcase %>
-                                </div>
-                                <div class="wrap-follow-button">
-                                    <div><%= follower.username %></div>
-                                </div>
-                            </div>
-                        </li>
-                    </div>
                     <div class="wrap-li">
                         <li>
                             <div class="wrap-imagen-info">
