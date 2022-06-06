@@ -3,34 +3,95 @@
 <div class="perfil">
     <div class="wrap-perfil-estadisticas">
         <div class="imagen-perfil">
-            M
+            <%= current_user.username[0].upcase %>
         </div>
-        <div class="estadistica">
+        <div class="estadistica" id="link-listas">
             <div class="estadistica-numero">
-                12
+                <%= lists_from_user(@user_id).count %>
             </div>
             <div class="estadistica-titulo">
                 Listas
             </div>
         </div>
-        <div class="estadistica">
+        <div class="estadistica" id="link-recetas">
             <div class="estadistica-numero">
-                34
+                <%= recipes_from_list(@mis_recetas).count %> 
             </div>
             <div class="estadistica-titulo">
                 Recetas
             </div>
         </div>
-        <div class="estadistica">
+        <div class="estadistica" id="link-siguiendo">
             <div class="estadistica-numero">
-                112
+                <%= followed_from_user(@user_id).count %>
+            </div>
+            <div class="estadistica-titulo">
+                Siguiendo
+            </div>
+        </div>
+        <div class="estadistica" id="link-seguidores">
+            <div class="estadistica-numero">
+                <%= follower_from_user(@user_id).count %>
             </div>
             <div class="estadistica-titulo">
                 Seguidores
             </div>
         </div>
     </div>
-    <h2>admin</h2>
-    <h2>admin@gmail.com</h2>
+    <div class="wrap-span">
+        <span>Nombre de usuario: <%= current_user.username %></span>
+    </div>
+    <div class="wrap-span">
+        <span>Correo electrónico: <%= current_user.email %></span>
+    </div>
+    <div class="wrap-sliders">
+        <div class="slider" id="slider-listas">
+            <h2>Mis listas</h2>
+            <ul>
+                <% lists_from_user(@user_id).each do |list| %>
+                    <li> <%= list.name %> </li>
+                <%end %>
+            </ul>
+        </div>
+        <div class="slider hidden" id="slider-recetas">
+            <h2>Mis Recetas</h2>
+            <ul>
+                <% recipes_from_list(@mis_recetas).each do |recipe| %>
+                    <div class="wrap-li">
+                        <li>
+                            <div class="wrap-imagen-info">
+                                <div class="imagen-li">
+                                    <%= image_tag recipe.url_img %>
+                                </div>
+                                <div class="wrap-info">
+                                    <div><%= recipe.name %></div>
+                                    <div><i class='fas fa-users'></i> <%= recipe.people %></div>
+                                    <div><i class='fas fa-clock'></i> <%= recipe.duration %></div>
+                                    <div><i class='fas fa-star'></i> <%= recipe.duration %></div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                <%end %>
+            </ul> 
+            
+        </div>
+        <div class="slider hidden" id="slider-siguiendo">
+            <h2>Siguiendo</h2>
+            <ul>
+                <% followed_from_user(@user_id).each do |followed| %>
+                <li>  <%= followed.username %> </li>
+                <%end %>
+            </ul>
+        </div>
+        <div class="slider hidden" id="slider-seguidores">
+            <h2>Seguidores</h2>
+            <ul>
+                <% follower_from_user(@user_id).each do |follower| %>
+                    <li>  <%= follower.username %> </li>
+                <%end %>
+            </ul>
+        </div>
+    </div>
 </div>
 <% end %>
