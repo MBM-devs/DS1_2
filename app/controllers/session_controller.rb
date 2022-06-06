@@ -10,6 +10,10 @@ class SessionController < ApplicationController
   def login
   end
 
+  # No hace falta, ya que la acción login solo renderiza la página.
+  def profile
+  end
+
   # Crea una sesion
   def create
     @user = User.find_by(username: params[:username])
