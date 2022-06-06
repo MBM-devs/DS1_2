@@ -23,16 +23,126 @@
     display: flex;
     height: max-content;
     justify-content: space-between;
+    align-content: center;
     margin: 10px 0px;
 }
 
 .imagen-perfil, .estadistica{
     min-height: 100%;
     max-height: 100%;
+    margin: auto 0px;
+    text-align: center;
+}
+
+.estadistica:hover {
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: 0.5s;
+}
+
+.perfil .wrap-span {
+    margin: 15px 0px;
+}
+
+.perfil .wrap-span span{
+    font-size: large;
+}
+
+.wrap-sliders {
+    min-width: 100%;
+    max-width: 100%;
+    border: 2px solid var(--form-outline);
+    border-radius: 10px;
+}
+
+.slider {
+    padding: 20px;
+}
+
+.slider h2{
+    margin: 0px 0px 10px 0px;
+}
+
+.slider ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.slider ul li{
+    margin: 0px 0px 10px 0px;
+}
+
+.wrap-li {
+    color: black;
+}
+
+
+.wrap-imagen-info, .wrap-info{
+    min-height: max-content;
+    max-height: max-content;
+    display: flex;
+}
+
+.imagen-li {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+}
+
+.imagen-li img{
+    min-width: 110px;
+    max-width: 110px;
+    border: 2px solid var(--form-outline);
+    border-radius: 10%;
+}
+
+.wrap-info{
+    align-content: center;
+    min-width: calc(100% - 110px);
+    max-width: calc(100% - 110px);
+    justify-content: space-between;
+}
+
+.wrap-info div{
+    min-height: fit-content;
+    max-height: fit-content;
     margin: auto;
     text-align: center;
 }
 
-.perfil h2 {
-    margin-left: 40px;
+.wrap-info div i{
+    color: var(--primary-color);
+}
+
+.wrap-follow-button{
+    display: flex;
+    align-content: center;
+    min-width: calc(100% - 55px);
+    max-width: calc(100% - 55px);
+    justify-content: space-between;
+}
+
+.wrap-imagen-info .imagen-perfil{
+    width: 55px; 
+    height: 55px; 
+    line-height: 55px;
+    font-size: x-large;
+}
+
+.wrap-follow-button div{
+    min-height: fit-content;
+    max-height: fit-content;
+    margin: auto 0px;
+    padding: 20px;
+}
+
+.wrap-follow-button a{
+    height: fit-content;
+    margin: auto 0px;
+}
+
+.wrap-follow-button a .button{
+    padding: 10px;
+    border-radius: 7.5px;
+    max-width: max-content;
 }

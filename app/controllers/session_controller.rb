@@ -12,6 +12,12 @@ class SessionController < ApplicationController
 
   # No hace falta, ya que la acción login solo renderiza la página.
   def profile
+    if session[:user_id] == nil
+      redirect_to login_path
+    else
+      @user_id = session[:user_id]
+      @mis_recetas = List.find_by(user_id: @user_id, name: "Mis Recetas")
+    end
   end
 
   # Crea una sesion
