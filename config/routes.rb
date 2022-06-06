@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api, defaults: { format: 'json' }  do
     namespace :v1 do
+      post 'login', :to =>  'login#create'
       resources :recipes_lists
       resources :shopping_lists
       resources :recipe_ingredients
