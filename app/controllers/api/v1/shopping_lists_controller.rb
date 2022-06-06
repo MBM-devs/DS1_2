@@ -1,7 +1,8 @@
 module Api
   module V1
     class ShoppingListsController < ApplicationController
-      before_action :set_shopping_list, only: %i[ show edit update destroy ]
+      skip_before_action :verify_authenticity_token
+      # before_action :set_shopping_list, only: %i[ show edit update destroy ]
 
       # GET /shopping_lists or /shopping_lists.json
       def index
@@ -10,7 +11,7 @@ module Api
 
       # GET /shopping_lists/1 or /shopping_lists/1.json
       def show
-        @shopping_list = ShoppingList.find_by(user_id: params[:id])
+        @shopping_list = ShoppingList.where(user_id: params[:id])
         if (@shopping_list!=nil)
             render json: @shopping_list, status: :ok
         else
