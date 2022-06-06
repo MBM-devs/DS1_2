@@ -72,7 +72,7 @@
                             </div>
                         </li>
                     </div>
-                <%end %>
+                <% end %>
             </ul> 
             
         </div>
@@ -80,16 +80,53 @@
             <h2>Siguiendo</h2>
             <ul>
                 <% followed_from_user(@user_id).each do |followed| %>
-                <li>  <%= followed.username %> </li>
-                <%end %>
+                    <div class="wrap-li">
+                        <li>
+                            <div class="wrap-imagen-info">
+                                <div class="imagen-perfil">
+                                    <%= followed.username[0].upcase %>
+                                </div>
+                                <div class="wrap-follow-button">
+                                    <div><%= followed.username %></div>
+                                    <a>
+                                        <div class="button"><span>Dejar de seguir</span></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                <% end %>
             </ul>
         </div>
         <div class="slider hidden" id="slider-seguidores">
             <h2>Seguidores</h2>
             <ul>
                 <% follower_from_user(@user_id).each do |follower| %>
-                    <li>  <%= follower.username %> </li>
-                <%end %>
+                    <div class="wrap-li">
+                        <li>
+                            <div class="wrap-imagen-info">
+                                <div class="imagen-perfil">
+                                    <%= follower.username[0].upcase %>
+                                </div>
+                                <div class="wrap-follow-button">
+                                    <div><%= follower.username %></div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="wrap-li">
+                        <li>
+                            <div class="wrap-imagen-info">
+                                <div class="imagen-perfil">
+                                    <%= follower.username[0].upcase %>
+                                </div>
+                                <div class="wrap-follow-button">
+                                    <div><%= follower.username %></div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                <% end %>
             </ul>
         </div>
     </div>

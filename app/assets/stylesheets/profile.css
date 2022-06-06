@@ -113,3 +113,36 @@
 .wrap-info div i{
     color: var(--primary-color);
 }
+
+.wrap-follow-button{
+    display: flex;
+    align-content: center;
+    min-width: calc(100% - 55px);
+    max-width: calc(100% - 55px);
+    justify-content: space-between;
+}
+
+.wrap-imagen-info .imagen-perfil{
+    width: 55px; 
+    height: 55px; 
+    line-height: 55px;
+    font-size: x-large;
+}
+
+.wrap-follow-button div{
+    min-height: fit-content;
+    max-height: fit-content;
+    margin: auto 0px;
+    padding: 20px;
+}
+
+.wrap-follow-button a{
+    height: fit-content;
+    margin: auto 0px;
+}
+
+.wrap-follow-button a .button{
+    padding: 10px;
+    border-radius: 7.5px;
+    max-width: max-content;
+}
