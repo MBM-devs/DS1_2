@@ -30,18 +30,35 @@ module Api
 
       # POST /recipes or /recipes.json
       def create
-        @recipe = Recipe.new(recipe_params)
+        @user = User.find_by(id: recipe_params[:user_id])
 
-        respond_to do |format|
-          if @recipe.save
-            format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
-            format.json { render :show, status: :created, location: @recipe }
-          else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        if(@user != nil)
+          @recipe = Recipe.new(id: recipe_params[:id], name: recipe_params[:name], duration: recipe_params[:duration], people: recipe_params[:people])
+          
+          respond_to do |format|
+            if @recipe.save
+              @mis_recetas = List.find_by(user_id: recipe_params[:user_id], name: 'Mis Recetas');
+              RecipesList.create(list_id: @mis_recetas.id, recipe_id: @recipe.id);
+
+              if(recipe_params[:list_id] != nil)
+                @lista = List.find_by(id: recipe_params[:list_id]);
+                RecipesList.create(list_id: @lista.id, recipe_id: @recipe.id);
+              end #if
+
+              # format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
+              format.json { render "recipes/show", status: :created, location: @recipe }
+            else
+              format.html { render :new, status: :unprocessable_entity }
+              format.json { render json: @recipe.errors, status: :unprocessable_entity }
+            end #if
+          end #respond
+        else
+          respond_to do |format|
+            message = {"error": "Usuario no valido."}
+            format.json { render json: message }
           end
-        end
-      end
+        end #if 
+      end #create
 
       # PATCH/PUT /recipes/1 or /recipes/1.json
       def update
@@ -74,7 +91,7 @@ module Api
 
         # Only allow a list of trusted parameters through.
         def recipe_params
-          params.require(:recipe).permit(:name, :people, :duration)
+          params.require(:recipe).permit(:name, :people, :duration, :user_id, :list_id)
         end
     end
   end
