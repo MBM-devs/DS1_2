@@ -11,7 +11,7 @@ module Api
 
       # GET /lists/1 or /lists/1.json
       def show
-        @list = List.find_by(id: params[:id])
+        @list = List.where(user_id: params[:id])
         if (@list!=nil)
             render json: @list, status: :ok
         else
