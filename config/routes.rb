@@ -7,6 +7,7 @@ Rails.application.routes.draw do
    post 'login', :to =>  'session#create'
    post 'logout', :to =>  'session#destroy'
    get 'logout', :to => 'session#destroy'
+   get 'profile', :to => 'session#profile'
 
   root  'session#home'
 
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api, defaults: { format: 'json' }  do
     namespace :v1 do
+      post 'login', :to =>  'login#create'
       resources :recipes_lists
       resources :shopping_lists
       resources :recipe_ingredients

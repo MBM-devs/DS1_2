@@ -9,6 +9,10 @@ class UsersController < ApplicationController
   # GET /users/1 or /users/1.json
   def show
     @user = User.find(params[:id])
+    # url = URI("https://clados.ugr.es/DS1_2/api/v1/users/#{params[:id]}")
+    # result = Net::HTTP.get(url)
+    # result = JSON.parse(result)
+    # @user = User.user_from_api(result)
   end
 
   # GET /users/new
@@ -22,6 +26,12 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
+    # uri = URI('https://clados.ugr.es/DS1_2/api/v1/users')
+    # puts user_params
+ 
+    # request = Net::HTTP.post_form(uri, user_params.to_hash)
+    # request.body = user_params
+    # puts request.body
     @user = User.new(user_params)
 
     respond_to do |format|

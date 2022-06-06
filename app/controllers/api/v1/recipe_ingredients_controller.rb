@@ -10,8 +10,8 @@ module Api
       end
 
       # GET /recipe_ingredients/1 or /recipe_ingredients/1.json
-      def show
-        @recipe_ingredient = RecipeIngredient.find_by(id: params[:id])
+      def show # muestra filtrando por id de receta
+        @recipe_ingredient = RecipeIngredient.where(recipe_id: params[:id])
         if (@recipe_ingredient!=nil)
             render json: @recipe_ingredient, status: :ok
         else
