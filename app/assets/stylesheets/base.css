@@ -144,3 +144,7 @@ a:hover{
     text-underline-offset: 2px;
     transition: 0.5s;
 }
+
+.hidden {
+    display: none;
+}
