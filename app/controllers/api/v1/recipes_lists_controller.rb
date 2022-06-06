@@ -11,7 +11,7 @@ module Api
 
       # GET /recipes_lists/1 or /recipes_lists/1.json
       def show
-        @recipe_ingredients = RecipesList.find_by(id: params[:id])
+        @recipe_ingredients = RecipesList.find_by(list_id: params[:id])
         if (@recipe_ingredients!=nil)
             render json: @recipe_ingredients, status: :ok
         else

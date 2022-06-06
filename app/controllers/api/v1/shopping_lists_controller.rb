@@ -10,7 +10,7 @@ module Api
 
       # GET /shopping_lists/1 or /shopping_lists/1.json
       def show
-        @shopping_list = ShoppingList.find_by(id: params[:id])
+        @shopping_list = ShoppingList.find_by(user_id: params[:id])
         if (@shopping_list!=nil)
             render json: @shopping_list, status: :ok
         else
