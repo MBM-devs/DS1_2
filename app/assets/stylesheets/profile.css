@@ -1,0 +1,38 @@
+.perfil {
+    min-width: 100%;
+    max-width: 100%;
+    height: fit-content;
+    display: block;
+}
+
+.imagen-perfil{
+    background-color: var(--primary-color);
+    color: white;
+    display: inline-block; 
+    border-radius: 50%; 
+    vertical-align: middle; 
+    margin-right: 0.5em; 
+    width: 75px; 
+    height: 75px; 
+    line-height: 75px; 
+    text-align: center;
+    font-size: xx-large;
+}
+
+.wrap-perfil-estadisticas {
+    display: flex;
+    height: max-content;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+
+.imagen-perfil, .estadistica{
+    min-height: 100%;
+    max-height: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.perfil h2 {
+    margin-left: 40px;
+}

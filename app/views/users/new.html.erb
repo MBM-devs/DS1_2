@@ -1,9 +1,9 @@
-<h1>Regístrate</h1>
+<% if !logged_in? %>
+  <h1>Regístrate</h1>
 
-<%= render "form", user: @user %> 
+  <%= render "form", user: @user %> 
 
-<br>
-
-<div class="centrar">
-  <%= link_to "¿Ya tienes cuenta? Iniciar sesión", login_path %>
-</div>
+  <div class="centrar">
+    <%= link_to "¿Ya tienes cuenta? Iniciar sesión", login_path %>
+  </div>
+<% end %>
