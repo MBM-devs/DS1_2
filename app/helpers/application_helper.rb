@@ -41,4 +41,16 @@ module ApplicationHelper
     def lists_from_user(user_id)
         return List.where(user_id: @user_id)  
     end
+
+    def rating_from_recipe(recipe_id)
+        @rating = 0.0;
+        ratings = Rating.where(recipe_id: recipe_id)
+        if(ratings.count > 0)
+            for entry in ratings do
+                @rating += entry.rating
+            end
+            @rating /= ratings.count
+        end
+        return @rating
+    end
 end
