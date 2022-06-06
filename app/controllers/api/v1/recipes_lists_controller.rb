@@ -31,7 +31,7 @@ module Api
       # POST /recipes_lists or /recipes_lists.json
       def create
         @recipes_list = RecipesList.new(recipes_list_params)
-
+        
         respond_to do |format|
           if @recipes_list.save
             format.html { redirect_to recipes_list_url(@recipes_list), notice: "Recipes list was successfully created." }
