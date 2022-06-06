@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_05_152614) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_06_205630) do
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "text"
+    t.datetime "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "followed_lists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "list_id", null: false
@@ -52,6 +61,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_05_152614) do
     t.index ["team"], name: "index_projects_on_team", unique: true
   end
 
+  create_table "ratings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "recipe_id", null: false
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_ratings_on_recipe_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
   create_table "recipe_ingredients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.bigint "ingredient_id", null: false
@@ -69,6 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_05_152614) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url_img"
   end
 
   create_table "recipes_lists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -107,15 +127,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_05_152614) do
     t.string "password_digest"
   end
 
+  add_foreign_key "comments", "users"
   add_foreign_key "followed_lists", "lists"
   add_foreign_key "followed_lists", "users"
   add_foreign_key "followings", "users", column: "followed", name: "followed_fk"
   add_foreign_key "followings", "users", column: "follower", name: "follower_fk"
   add_foreign_key "lists", "users"
+  add_foreign_key "ratings", "recipes"
+  add_foreign_key "ratings", "users"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
-  add_foreign_key "recipes_lists", "lists"
-  add_foreign_key "recipes_lists", "recipes"
+  add_foreign_key "recipes_lists", "lists", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "recipes_lists", "recipes", on_update: :cascade, on_delete: :cascade
   add_foreign_key "shopping_lists", "ingredients"
   add_foreign_key "shopping_lists", "users"
   add_foreign_key "steps", "recipes"
