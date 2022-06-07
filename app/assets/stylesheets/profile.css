@@ -83,11 +83,17 @@
     display: flex;
 }
 
-.wrap-info span {
+.wrap-list-stats {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrap-list-stats span {
     padding: 0px;
 }
 
-.wrap-info span i{
+.wrap-list-stats span i{
     color: var(--primary-color);
 }
 

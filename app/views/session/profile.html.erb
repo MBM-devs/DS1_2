@@ -51,12 +51,10 @@
                 <% lists_from_user(@user_id).each do |list| %>
                     <div class="wrap-li">
                         <li>
-                            <div class="wrap-imagen-info">
-                                <div class="wrap-info">
-                                    <span><i class='fas fa-book'></i> <%= list.name %></span>
-                                    <span><i class='fas fa-utensils'></i> <%= list.name %></span>
-                                    <span><i class='fas fa-star'></i> <%= list.name %></span>
-                                </div>
+                            <div class="wrap-list-stats">
+                                <span><i class='fas fa-book'></i> <%= list.name %></span>
+                                <span><i class='fas fa-utensils'></i> <%= list.name %></span>
+                                <span><i class='fas fa-star'></i> <%= list.name %></span>
                             </div>
                         </li>
                     </div>
