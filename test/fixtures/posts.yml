@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  recipe_id: 
+  following_id: 
+  list_id: 
+
+two:
+  user: two
+  recipe_id: 
+  following_id: 
+  list_id: 

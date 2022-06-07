@@ -1,3 +1,7 @@
+@import url(formulario.css);
+@import url(profile.css);
+@import url(home.css);
+
 :root{
     --primary-color: rgb(52, 160, 164);
     --secondary-color: rgb(0, 106, 110);
@@ -121,6 +125,7 @@ nav ul li {
 a {
     color: var(--primary-color);
     text-decoration: none;
+    height: fit-content;
 }
 
 a:hover{
@@ -143,4 +148,8 @@ a:hover{
     text-decoration-thickness: 2px;
     text-underline-offset: 2px;
     transition: 0.5s;
+}
+
+.hidden {
+    display: none;
 }

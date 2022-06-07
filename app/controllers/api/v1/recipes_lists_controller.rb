@@ -11,7 +11,7 @@ module Api
 
       # GET /recipes_lists/1 or /recipes_lists/1.json
       def show
-        @recipe_ingredients = RecipesList.find_by(list_id: params[:id])
+        @recipe_ingredients = RecipesList.where(list_id: params[:id])
         if (@recipe_ingredients!=nil)
             render json: @recipe_ingredients, status: :ok
         else
@@ -30,10 +30,12 @@ module Api
 
       # POST /recipes_lists or /recipes_lists.json
       def create
-        @recipes_list = RecipesList.new(recipes_list_params)
+        @recipes_list = RecipesList.new(list_id: recipes_list_params[:list_id], recipe_id: recipes_list_params[:recipe_id])
         
         respond_to do |format|
           if @recipes_list.save
+     
+            Post.create(user_id: recipes_list_params[:user_id], recipe_id: recipes_list_params[:recipe_id], list_id: recipes_list_params[:list_id])
             format.html { redirect_to recipes_list_url(@recipes_list), notice: "Recipes list was successfully created." }
             format.json { render :show, status: :created, location: @recipes_list }
           else
@@ -74,7 +76,7 @@ module Api
 
         # Only allow a list of trusted parameters through.
         def recipes_list_params
-          params.require(:recipes_list).permit(:list_id, :recipe_id)
+          params.require(:recipes_list).permit(:list_id, :recipe_id, :user_id)
         end
     end
   end
