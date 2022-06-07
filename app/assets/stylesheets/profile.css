@@ -83,6 +83,14 @@
     display: flex;
 }
 
+.wrap-info span {
+    padding: 0px;
+}
+
+.wrap-info span i{
+    color: var(--primary-color);
+}
+
 .imagen-li {
     width: fit-content;
     display: flex;
