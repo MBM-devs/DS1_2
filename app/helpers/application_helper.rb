@@ -91,13 +91,25 @@ module ApplicationHelper
         return type
     end
 
-    def posts_from_followers(user_id)
-        followers = Following.where(followed: user_id)
-        posts = []
-        for follower in followers
-            posts.push(posts_from_user(follower.id))
+    def posts_from_followings(user_id)
+        followings = Following.where(follower: user_id)
+        @followings_ids = []
+        for id in followings do
+            @followings_ids.push(id.followed)
         end
-        return posts
+        return Post.where("posts.user_id IN (?)", @followings_ids)
+    end
+
+    def username(user_id)
+        return User.find_by_id(user_id).username
+    end
+
+    def recipe(id)
+        return Recipe.find_by_id(id)
+    end
+
+    def lista(id)
+        List.find_by_id(id)
     end
 
 end
