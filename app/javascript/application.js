@@ -1,8 +1,6 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "controllers"
-
-var sliders = ["slider-listas", "slider-recetas", "slider-siguiendo", "slider-seguidores"]
+// import "@hotwired/turbo-rails"
+// import "controllers"
 
 window.onload = () => {
     document.getElementById("link-listas").addEventListener("click", showListas);
@@ -10,6 +8,8 @@ window.onload = () => {
     document.getElementById("link-siguiendo").addEventListener("click", showSiguiendo);
     document.getElementById("link-seguidores").addEventListener("click", showSeguidores);
 }
+
+var sliders = ["slider-listas", "slider-recetas", "slider-siguiendo", "slider-seguidores"]
 
 function showSlider(id) {
     hideSliders();

@@ -61,12 +61,12 @@
                         <li>
                             <div class="wrap-imagen-info">
                                 <div class="imagen-li">
-                                    <%= image_tag recipe.url_img %>
+                                    <%= image_tag recipe.url_img, :class => 'receta-imagen' %>
                                 </div>
                                 <div class="wrap-info">
                                     <div><%= recipe.name %></div>
                                     <div><i class='fas fa-users'></i> <%= recipe.people %></div>
-                                    <div><i class='fas fa-clock'></i> <%= recipe.duration %></div>
+                                    <div><i class='fas fa-clock'></i> <%= recipe.duration %>'</div>
                                     <div><i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_recipe(recipe.id)) %></div>
                                 </div>
                             </div>
@@ -119,4 +119,5 @@
         </div>
     </div>
 </div>
+<%= javascript_include_tag "application", "data-turbo-track": "reload" %>
 <% end %>
