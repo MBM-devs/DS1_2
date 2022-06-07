@@ -1,5 +1,6 @@
 @import url(formulario.css);
 @import url(profile.css);
+@import url(home.css);
 
 :root{
     --primary-color: rgb(52, 160, 164);

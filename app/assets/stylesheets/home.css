@@ -1,0 +1,10 @@
+.wrap-publicacion {
+    min-width: 100%;
+    max-width: 100%;
+    border-bottom: 1px solid var(--form-outline);
+    padding-top: 15px;
+}
+
+.wrap-publicacion .wrap-imagen-info {
+    padding-bottom: 15px;
+}

@@ -1,5 +1,78 @@
-<h1>Feed</h1>
-
 <% if logged_in? %>
-    <h1> <%= current_user.email %> </h1>
+    <h1>Últimas novedades</h1>
+
+    <div class="wrap-publicacion">
+        <div class="wrap-imagen-info">
+            <div class="imagen-perfil">
+                F
+            </div>
+            <div class="wrap-follow-button">
+                <div>Rogelio ha comenzado a seguir a fulanito</div>
+                <a>
+                    <div class="button"><span>Seguir</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-publicacion">
+        <div class="wrap-imagen-info">
+            <div class="imagen-perfil">
+                F
+            </div>
+            <div class="wrap-follow-button">
+                <div>Menganito ha comenzado a seguir a fulanito</div>
+                <a>
+                    <div class="button"><span>Dejar de seguir</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-publicacion">
+        <div class="wrap-imagen-info">
+            <div class="imagen-perfil">
+                E
+            </div>
+            <div class="wrap-follow-button">
+                <div>Evaristo ha creado una nueva receta</div>
+                <a>
+                    <div class="button"><span>Guardar</span></div>
+                </a>
+            </div>
+        </div>
+        <div class="wrap-imagen-info">
+            <div class="imagen-li">
+                <%= image_tag "/default_recipe_image.png" %>
+            </div>
+            <div class="wrap-info">
+                <div>Macarrones</div>
+                <div><i class='fas fa-users'></i> 5</div>
+                <div><i class='fas fa-clock'></i> 12 min</div>
+                <div><i class='fas fa-star'></i> 3.2</div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-publicacion">
+        <div class="wrap-imagen-info">
+            <div class="imagen-perfil">
+                E
+            </div>
+            <div class="wrap-follow-button">
+                <div>Evaristo ha creado una nueva receta</div>
+                <a>
+                    <div class="button"><span>Eliminar de guardados</span></div>
+                </a>
+            </div>
+        </div>
+        <div class="wrap-imagen-info">
+            <div class="imagen-li">
+                <%= image_tag "/default_recipe_image.png" %>
+            </div>
+            <div class="wrap-info">
+                <div>Pollas en ollas</div>
+                <div><i class='fas fa-users'></i> 5</div>
+                <div><i class='fas fa-clock'></i> 12 min</div>
+                <div><i class='fas fa-star'></i> 3.2</div>
+            </div>
+        </div>
+    </div>
 <% end %>
