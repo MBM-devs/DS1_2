@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_07_091213) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_07_111400) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "text"
@@ -54,15 +54,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_091213) do
 
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "text"
     t.bigint "recipe_id"
     t.bigint "following_id"
     t.bigint "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["following_id"], name: "index_posts_on_following_id"
-    t.index ["list_id"], name: "index_posts_on_list_id"
-    t.index ["recipe_id"], name: "index_posts_on_recipe_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -102,7 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_091213) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "url_img"
+    t.string "url_img", default: "https://clados.ugr.es/DS1_2/default_recipe_image.png"
   end
 
   create_table "recipes_lists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -147,9 +143,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_091213) do
   add_foreign_key "followings", "users", column: "followed", name: "followed_fk"
   add_foreign_key "followings", "users", column: "follower", name: "follower_fk"
   add_foreign_key "lists", "users"
-  add_foreign_key "posts", "followings"
-  add_foreign_key "posts", "lists"
-  add_foreign_key "posts", "recipes"
   add_foreign_key "posts", "users"
   add_foreign_key "ratings", "recipes"
   add_foreign_key "ratings", "users"

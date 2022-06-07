@@ -1,5 +1,6 @@
 class FollowingsController < ApplicationController
-  before_action :set_following, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
+  # before_action :set_following, only: %i[ show edit update destroy ]
 
   # GET /followings or /followings.json
   def index
@@ -25,6 +26,7 @@ class FollowingsController < ApplicationController
 
     respond_to do |format|
       if @following.save
+        Post.create(user_id: following_params[:follower], following_id: following_params[:followed])
         format.html { redirect_to following_url(@following), notice: "Following was successfully created." }
         format.json { render :show, status: :created, location: @following }
       else

@@ -34,6 +34,7 @@ module Api
 
         respond_to do |format|
           if @list.save
+            Post.create(user_id: list_params[:user_id], list_id: @list.id)
             format.html { redirect_to list_url(@list), notice: "List was successfully created." }
             format.json { render :show, status: :created, location: @list }
           else
