@@ -30,7 +30,7 @@ module ApplicationHelper
     end
 
     def followed_from_user(user_id)
-        followed_list = Following.where(follower: @user_id)
+        followed_list = Following.where(follower: user_id)
         @followed_ids = []
         for id in followed_list do
             @followed_ids.push(id.followed)
@@ -39,7 +39,7 @@ module ApplicationHelper
     end
 
     def lists_from_user(user_id)
-        return List.where(user_id: @user_id)  
+        return List.where(user_id: user_id)  
     end
 
     def rating_from_recipe(recipe_id)
@@ -50,6 +50,18 @@ module ApplicationHelper
                 @rating += entry.rating
             end
             @rating /= ratings.count
+        end
+        return @rating
+    end
+
+    def rating_from_list(list)
+        recetas = recipes_from_list(list)
+        @rating = 0.0;
+        if(recetas.count > 0)
+            for receta in recetas do
+                @rating += rating_from_recipe(receta);
+            end
+            @rating /= recetas.count
         end
         return @rating
     end

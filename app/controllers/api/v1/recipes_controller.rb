@@ -93,7 +93,7 @@ module Api
 
         # Only allow a list of trusted parameters through.
         def recipe_params
-          params.require(:recipe).permit(:name, :people, :duration, :user_id, :list_id)
+          params.require(:recipe).permit(:name, :people, :duration, :user_id, :list_id, :url_img)
         end
     end
   end

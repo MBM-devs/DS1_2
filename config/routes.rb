@@ -8,6 +8,7 @@ Rails.application.routes.draw do
    post 'logout', :to =>  'session#destroy'
    get 'logout', :to => 'session#destroy'
    get 'profile', :to => 'session#profile'
+   get 'profile/:id' => 'session#profile'
 
   root  'session#home'
 

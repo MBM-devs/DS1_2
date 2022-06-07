@@ -8,7 +8,8 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id])      
+    @mis_recetas = List.find_by(user_id: @user.id, name: "Mis Recetas")
     # url = URI("https://clados.ugr.es/DS1_2/api/v1/users/#{params[:id]}")
     # result = Net::HTTP.get(url)
     # result = JSON.parse(result)

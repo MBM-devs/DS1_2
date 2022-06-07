@@ -125,6 +125,7 @@ nav ul li {
 a {
     color: var(--primary-color);
     text-decoration: none;
+    height: fit-content;
 }
 
 a:hover{

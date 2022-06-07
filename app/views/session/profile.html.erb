@@ -1,13 +1,17 @@
 <% if logged_in? %>
-<h1>Mi perfil</h1>
+<% if current_user.id == @user.id %>
+    <h1>Mi perfil</h1>
+<% else %>
+    <h1>Perfil de <%= @user.username %></h1>
+<% end %>
 <div class="perfil">
     <div class="wrap-perfil-estadisticas">
         <div class="imagen-perfil">
-            <%= current_user.username[0].upcase %>
+            <%= @user.username[0].upcase %>
         </div>
         <div class="estadistica" id="link-listas">
             <div class="estadistica-numero">
-                <%= lists_from_user(@user_id).count %>
+                <%= lists_from_user(@user.id).count %>
             </div>
             <div class="estadistica-titulo">
                 Listas
@@ -23,7 +27,7 @@
         </div>
         <div class="estadistica" id="link-siguiendo">
             <div class="estadistica-numero">
-                <%= followed_from_user(@user_id).count %>
+                <%= followed_from_user(@user.id).count %>
             </div>
             <div class="estadistica-titulo">
                 Siguiendo
@@ -31,7 +35,7 @@
         </div>
         <div class="estadistica" id="link-seguidores">
             <div class="estadistica-numero">
-                <%= follower_from_user(@user_id).count %>
+                <%= follower_from_user(@user.id).count %>
             </div>
             <div class="estadistica-titulo">
                 Seguidores
@@ -39,22 +43,22 @@
         </div>
     </div>
     <div class="wrap-span">
-        <span>Nombre de usuario: <%= current_user.username %></span>
+        <span>Nombre de usuario: <%= @user.username %></span>
     </div>
     <div class="wrap-span">
-        <span>Correo electrónico: <%= current_user.email %></span>
+        <span>Correo electrónico: <%= @user.email %></span>
     </div>
     <div class="wrap-sliders">
         <div class="slider" id="slider-listas">
             <h2>Mis listas</h2>
             <ul>
-                <% lists_from_user(@user_id).each do |list| %>
+                <% lists_from_user(@user.id).each do |list| %>
                     <div class="wrap-li">
                         <li>
                             <div class="wrap-list-stats">
                                 <span><i class='fas fa-book'></i> <%= list.name %></span>
-                                <span><i class='fas fa-utensils'></i> <%= list.name %></span>
-                                <span><i class='fas fa-star'></i> <%= list.name %></span>
+                                <span><i class='fas fa-utensils'></i> <%= recipes_from_list(list).count %></span>
+                                <span><i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_list(list)) %></span>
                             </div>
                         </li>
                     </div>
@@ -87,18 +91,25 @@
         <div class="slider hidden" id="slider-siguiendo">
             <h2>Siguiendo</h2>
             <ul>
-                <% followed_from_user(@user_id).each do |followed| %>
+                <% followed_from_user(@user.id).each do |followed| %>
                     <div class="wrap-li">
                         <li>
                             <div class="wrap-imagen-info">
-                                <div class="imagen-perfil">
-                                    <%= followed.username[0].upcase %>
-                                </div>
+                                <%= link_to profile_path(:id => followed.id) do %>
+                                    <div class="imagen-perfil">
+                                        <%= followed.username[0].upcase %>
+                                    </div>
+                                <% end %>
                                 <div class="wrap-follow-button">
-                                    <div><%= followed.username %></div>
-                                    <a>
-                                        <div class="button"><span>Dejar de seguir</span></div>
-                                    </a>
+                                    <%= link_to profile_path(:id => followed.id) do %>
+                                        <div><%= followed.username %></div>
+                                    <% end %>
+
+                                    <% if current_user.id == @user.id %>
+                                        <a>
+                                            <div class="button"><span>Dejar de seguir</span></div>
+                                        </a>
+                                    <% end %>
                                 </div>
                             </div>
                         </li>
@@ -109,7 +120,7 @@
         <div class="slider hidden" id="slider-seguidores">
             <h2>Seguidores</h2>
             <ul>
-                <% follower_from_user(@user_id).each do |follower| %>
+                <% follower_from_user(@user.id).each do |follower| %>
                     <div class="wrap-li">
                         <li>
                             <div class="wrap-imagen-info">

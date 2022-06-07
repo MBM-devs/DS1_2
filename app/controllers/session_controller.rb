@@ -15,8 +15,14 @@ class SessionController < ApplicationController
     if session[:user_id] == nil
       redirect_to login_path
     else
-      @user_id = session[:user_id]
-      @mis_recetas = List.find_by(user_id: @user_id, name: "Mis Recetas")
+      if(params[:id] != nil)
+        @user = User.find_by(id: params[:id])
+      else     
+        @user = User.find_by(id: session[:user_id])
+      end
+    
+      @mis_recetas = List.find_by(user_id: @user.id, name: "Mis Recetas")
+      # redirect_to user_path(session[:user_id])
     end
   end
 
