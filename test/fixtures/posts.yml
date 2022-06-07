@@ -2,14 +2,12 @@
 
 one:
   user: one
-  text: MyString
-  recipe: one
-  user: one
-  list: one
+  recipe_id: 
+  following_id: 
+  list_id: 
 
 two:
   user: two
-  text: MyString
-  recipe: two
-  user: two
-  list: two
+  recipe_id: 
+  following_id: 
+  list_id: 

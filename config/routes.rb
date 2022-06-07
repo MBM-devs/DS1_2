@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  resources :posts
-  resources :ratings
-  resources :comments
   get 'home/index'
 
    # Login and register
@@ -15,6 +12,9 @@ Rails.application.routes.draw do
   root  'session#home'
 
   # resources
+  resources :posts
+  resources :ratings
+  resources :comments
   resources :recipes_lists
   resources :shopping_lists
   resources :recipe_ingredients
@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' }  do
     namespace :v1 do
       post 'login', :to =>  'login#create'
+      resources :posts
+      resources :ratings
+      resources :comments
       resources :recipes_lists
       resources :shopping_lists
       resources :recipe_ingredients

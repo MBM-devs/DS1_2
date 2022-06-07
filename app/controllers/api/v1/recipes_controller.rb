@@ -37,12 +37,14 @@ module Api
           
           respond_to do |format|
             if @recipe.save
+              Post.create(user_id: recipe_params[:user_id], recipe_id: @recipe.id)
               @mis_recetas = List.find_by(user_id: recipe_params[:user_id], name: 'Mis Recetas');
+              
               RecipesList.create(list_id: @mis_recetas.id, recipe_id: @recipe.id);
-
               if(recipe_params[:list_id] != nil)
                 @lista = List.find_by(id: recipe_params[:list_id]);
                 RecipesList.create(list_id: @lista.id, recipe_id: @recipe.id);
+                Post.create(user_id: recipes_params[:user_id], recipe_id: @recipe.id, list_id: @lista.id)
               end #if
 
               # format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }

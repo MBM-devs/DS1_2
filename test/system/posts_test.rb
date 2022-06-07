@@ -14,9 +14,9 @@ class PostsTest < ApplicationSystemTestCase
     visit posts_url
     click_on "New post"
 
+    fill_in "Following", with: @post.following_id
     fill_in "List", with: @post.list_id
     fill_in "Recipe", with: @post.recipe_id
-    fill_in "Text", with: @post.text
     fill_in "User", with: @post.user_id
     click_on "Create Post"
 
@@ -28,9 +28,9 @@ class PostsTest < ApplicationSystemTestCase
     visit post_url(@post)
     click_on "Edit this post", match: :first
 
+    fill_in "Following", with: @post.following_id
     fill_in "List", with: @post.list_id
     fill_in "Recipe", with: @post.recipe_id
-    fill_in "Text", with: @post.text
     fill_in "User", with: @post.user_id
     click_on "Update Post"
 
