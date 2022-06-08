@@ -59,7 +59,6 @@ class SessionController < ApplicationController
   end
 
   def search_users
-    puts ("#{params} AA")
     if(params[:username])
       @users = User.where("username LIKE ?", "%" + params[:username] + "%")
     else
@@ -89,7 +88,7 @@ class SessionController < ApplicationController
   def follow
     if(params[:id_current] && params[:id_follow])
       Following.create(follower: params[:id_current], followed: params[:id_follow])
-      redirect_to profile_path(:id => params[:id_follow])
+      redirect_to request.referer
     end
   end
 
@@ -97,14 +96,14 @@ class SessionController < ApplicationController
     if(params[:id_current] && params[:id_unfollow])
       row = Following.find_by(follower: params[:id_current], followed: params[:id_unfollow])
       Following.destroy(row.id)
-      redirect_to profile_path(:id => params[:id_unfollow])
+      redirect_to request.referer
     end
   end
 
   def follow_list
     if(params[:id_current] && params[:id_follow])
       FollowedList.create(user_id: params[:id_current], list_id: params[:id_follow])
-      redirect_to root_path
+      redirect_to request.referer
     end
   end
 
@@ -112,7 +111,7 @@ class SessionController < ApplicationController
     if(params[:id_current] && params[:id_unfollow])
       row = FollowedList.find_by(user_id: params[:id_current], list_id: params[:id_unfollow])
       FollowedList.destroy(row.id)
-      redirect_to root_path
+      redirect_to request.referer
     end
   end
 

@@ -65,7 +65,7 @@
         <div class="slider" id="slider-listas">
             <h2>Listas</h2>
             <ul>
-                <% lists_from_user(@user.id).each do |list| %>
+                <% user_related_lists(@user.id).each do |list| %>
                     <div class="wrap-li">
                         <li>
                             <div class="wrap-list-stats">
@@ -81,7 +81,7 @@
                             </div>
                             <div class="wrap-list-stats">
                                 <div class="wrap-stat justify-left">
-                                    <% if current_user.id != @user.id && !is_my_list?(current_user.id, list.id) %>
+                                    <% if !is_my_list?(current_user.id, list.id) %>
                                         <% if is_following_list?(current_user.id, list.id) %>
                                             <%= link_to unfollow_list_path(:id_current => current_user.id, :id_unfollow => list.id) do %>
                                                 <i class='fas fa-minus'></i> dejar de seguir lista

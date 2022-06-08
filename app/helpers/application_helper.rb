@@ -42,6 +42,23 @@ module ApplicationHelper
         return List.where(user_id: user_id)  
     end
 
+    def user_related_lists(user_id)
+        listas_usuario = List.where(user_id: user_id)
+        listas_seguidas = FollowedList.where(user_id: user_id)
+
+        id_listas = []
+
+        for lista in listas_usuario do
+            id_listas.push(lista.id)
+        end
+
+        for lista in listas_seguidas do
+            id_listas.push(lista.list_id)
+        end
+
+        return List.where("id IN (?)", id_listas)
+    end
+
     def is_my_list?(user_id, list_id)
         is_my_list = List.find_by(user_id: user_id, id: list_id);
         return is_my_list != nil
