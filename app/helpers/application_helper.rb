@@ -65,4 +65,9 @@ module ApplicationHelper
         end
         return @rating
     end
+
+    def is_following?(id, id_follower)
+        is_following = Following.find_by(follower: id, followed: id_follower)
+        return is_following != nil
+    end
 end
