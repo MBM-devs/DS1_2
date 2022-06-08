@@ -11,8 +11,8 @@
                 <% end %>
                 <% case post_type(post)  
                     when "new_recipe" %>
-                        <div class="wrap-follow-button">
-                            <div><%= link_to profile_path(:id => post.user_id) do %> <%= username(post.user_id) %><% end %> ha creado una nueva receta</div>
+                    <div class="wrap-follow-button">
+                        <div><%= link_to profile_path(:id => post.user_id) do %> <%= username(post.user_id) %><% end %> ha creado una nueva receta</div>
                             <% if is_recipe_saved?(current_user.id, post.recipe_id) %>
                                 <%= link_to unsave_recipe_path(:id_user => current_user.id, :id_recipe => post.recipe_id) do %>
                                     <i class='fas fa-minus'></i>
