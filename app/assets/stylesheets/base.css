@@ -154,3 +154,8 @@ a:hover{
 .hidden {
     display: none;
 }
+
+.qr {
+ min-width: 150px;
+ max-width: 150px;
+}
