@@ -31,5 +31,6 @@
 /config/master.key
 
 # Config files
-Gemfile
-Gemfile.lock
+# Gemfile
+# Gemfile.lock
+# config
