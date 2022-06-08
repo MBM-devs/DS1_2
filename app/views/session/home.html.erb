@@ -1,174 +1,86 @@
 <% if logged_in? %>
     <h1>Últimas novedades</h1>
 
-    <div class="wrap-publicacion">
-        <div class="wrap-imagen-info">
-            <div class="imagen-perfil">
-                F
-            </div>
-            <div class="wrap-follow-button">
-                <div>Rogelio ha comenzado a seguir a fulanito</div>
-                <a href="#">
-                    <i class='fas fa-user-plus'></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="wrap-publicacion">
-        <div class="wrap-imagen-info">
-            <div class="imagen-perfil">
-                F
-            </div>
-            <div class="wrap-follow-button">
-                <div>Menganito ha comenzado a seguir a fulanito</div>
-                <a href="#">
-                    <i class='fas fa-user-minus'></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="wrap-publicacion">
-        <div class="wrap-imagen-info">
-            <div class="imagen-perfil">
-                E
-            </div>
-            <div class="wrap-follow-button">
-                <div>Evaristo ha creado una nueva receta</div>
-                <a href="#">
-                    <i class='fas fa-plus'></i>
-                </a>
-            </div>
-        </div>
-        <div class="wrap-imagen-info">
-            <div class="imagen-li">
-                <%= image_tag "/default_recipe_image.png" %>
-            </div>
-            <div class="wrap-info">
-                <div>Macarrones</div>
-                <div><i class='fas fa-users'></i> 5</div>
-                <div><i class='fas fa-clock'></i> 12 min</div>
-                <div><i class='fas fa-star'></i> 3.2</div>
-            </div>
-        </div>
-    </div>
-    <div class="wrap-publicacion">
-        <div class="wrap-imagen-info">
-            <div class="imagen-perfil">
-                E
-            </div>
-            <div class="wrap-follow-button">
-                <div>Evaristo ha creado una nueva receta</div>
-                <a href="#">
-                    <i class='fas fa-minus'></i>
-                </a>
-            </div>
-        </div>
-        <div class="wrap-imagen-info">
-            <div class="imagen-li">
-                <%= image_tag "/default_recipe_image.png" %>
-            </div>
-            <div class="wrap-info">
-                <div>Pollas en ollas</div>
-                <div><i class='fas fa-users'></i> 5</div>
-                <div><i class='fas fa-clock'></i> 12 min</div>
-                <div><i class='fas fa-star'></i> 3.2</div>
-            </div>
-        </div>
-    </div>
-    <div class="wrap-publicacion">
-        <div class="wrap-imagen-info">
-            <div class="imagen-perfil">
-                E
-            </div>
-            <div class="wrap-follow-button">
-                <div>Evaristo ha creado una nueva lista</div>
-                <a href="#">
-                    <i class='fas fa-plus'></i>
-                </a>
+    <% posts_from_followings(current_user.id).each do |post| %>
+        <div class="wrap-publicacion">
+            <div class="wrap-imagen-info">
+                <div class="imagen-perfil">
+                    <%= username(post.user_id)[0].upcase %>
+                </div>
+                <% case post_type(post)  
+                    when "new_recipe" %>
+                        <div class="wrap-follow-button">
+                            <div><%= username(post.user_id) %> ha creado una nueva receta</div>
+                            <a href="#">
+                                <i class='fas fa-plus'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="wrap-imagen-info">
+                        <div class="imagen-li">
+                            <%= image_tag recipe(post.recipe_id).url_img %>
+                        </div>
+                        <div class="wrap-info">
+                            <div><%= recipe(post.recipe_id).name %></div>
+                            <div><i class='fas fa-users'></i> <%= recipe(post.recipe_id).people %></div>
+                            <div><i class='fas fa-clock'></i> <%= recipe(post.recipe_id).duration %> min</div>
+                            <div><i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_recipe(post.recipe_id)) %></div>
+                        </div>
+
+                    <% when "new_list" %>
+                        <div class="wrap-follow-button">
+                            <div><%= username(post.user_id) %> ha creado una nueva lista</div>
+                            <a href="#">
+                                <i class='fas fa-plus'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="wrap-list-stats">
+                        <div class="wrap-stat justify-left">
+                            <i class='fas fa-book'></i> <%= lista(post.list_id).name %>
+                        </div>
+                        <div class="wrap-stat justify-center">
+                            <i class='fas fa-utensils'></i> <%= recipes_from_list(post.list_id).count %>
+                        </div>
+                        <div class="wrap-stat justify-right">
+                            <i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_list(post.list_id)) %>
+                        </div>
+                           
+                    <% when "recipe_to_list" %>
+                            <div class="wrap-follow-button">
+                                <div><%= username(post.user_id) %> ha añadido una receta a la lista <%= lista(post.list_id).name %></div>
+                                <a href="#">
+                                    <i class='fas fa-plus'></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="wrap-imagen-info">
+                            <div class="imagen-li">
+                                <%= image_tag recipe(post.recipe_id).url_img %>
+                            </div>
+                            <div class="wrap-info">
+                                <div><%= recipe(post.recipe_id).name %></div>
+                                <div><i class='fas fa-users'></i> <%= recipe(post.recipe_id).people %></div>
+                                <div><i class='fas fa-clock'></i> <%= recipe(post.recipe_id).duration %> min</div>
+                                <div><i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_recipe(post.recipe_id)) %></div>
+                            </div>
+                    <% when "follow" %>
+                    
+                        <div class="wrap-follow-button">
+                            <div><%= username(post.user_id) %> ha comenzado a seguir a <%= username(post.following_id) %></div>
+                            <% if is_following?(current_user.id, post.following_id) %>
+                                <a href="#">
+                                    <i class='fas fa-user-minus'></i>
+                                </a>
+                            <% else %>
+                                <a href="#">
+                                    <i class='fas fa-user-plus'></i>
+                                </a>
+                            <% end %>
+                        </div>
+                        
+                <% end %>
             </div>
         </div>
-        <div class="wrap-list-stats">
-            <div class="wrap-stat justify-left">
-                <i class='fas fa-book'></i> Recetas para boda gitana
-            </div>
-            <div class="wrap-stat justify-center">
-                <i class='fas fa-utensils'></i> 120
-            </div>
-            <div class="wrap-stat justify-right">
-                <i class='fas fa-star'></i> 12
-            </div>
-        </div>
-    </div>
-    <div class="wrap-publicacion">
-        <div class="wrap-imagen-info">
-            <div class="imagen-perfil">
-                E
-            </div>
-            <div class="wrap-follow-button">
-                <div>Evaristo ha creado una nueva lista</div>
-                <a href="#">
-                    <i class='fas fa-minus'></i>
-                </a>
-            </div>
-        </div>
-        <div class="wrap-list-stats">
-            <div class="wrap-stat justify-left">
-                <i class='fas fa-book'></i> Recetas para gallegos
-            </div>
-            <div class="wrap-stat justify-center">
-                <i class='fas fa-utensils'></i> 4
-            </div>
-            <div class="wrap-stat justify-right">
-                <i class='fas fa-star'></i> 120
-            </div>
-        </div>
-    </div>
-    <div class="wrap-publicacion">
-        <div class="wrap-imagen-info">
-            <div class="imagen-perfil">
-                E
-            </div>
-            <div class="wrap-follow-button">
-                <div>Evaristo ha añadido una receta a la lista postres</div>
-                <a href="#">
-                    <i class='fas fa-plus'></i>
-                </a>
-            </div>
-        </div>
-        <div class="wrap-imagen-info">
-            <div class="imagen-li">
-                <%= image_tag "/default_recipe_image.png" %>
-            </div>
-            <div class="wrap-info">
-                <div>Piononos</div>
-                <div><i class='fas fa-users'></i> 5</div>
-                <div><i class='fas fa-clock'></i> 12 min</div>
-                <div><i class='fas fa-star'></i> 3.2</div>
-            </div>
-        </div>
-    </div>
-    <div class="wrap-publicacion">
-        <div class="wrap-imagen-info">
-            <div class="imagen-perfil">
-                E
-            </div>
-            <div class="wrap-follow-button">
-                <div>Evaristo ha añadido una receta a la lista desayunos para yankis locos por Trump</div>
-                <a href="#">
-                    <i class='fas fa-minus'></i>
-                </a>
-            </div>
-        </div>
-        <div class="wrap-imagen-info">
-            <div class="imagen-li">
-                <%= image_tag "/default_recipe_image.png" %>
-            </div>
-            <div class="wrap-info">
-                <div>Bacon con huevos</div>
-                <div><i class='fas fa-users'></i> 5</div>
-                <div><i class='fas fa-clock'></i> 12 min</div>
-                <div><i class='fas fa-star'></i> 3.2</div>
-            </div>
-        </div>
-    </div>
+    <% end %>
 <% end %>

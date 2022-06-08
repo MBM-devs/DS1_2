@@ -1,8 +1,12 @@
 class SessionController < ApplicationController
+  include ApplicationHelper
+  skip_before_action :verify_authenticity_token
   # No hace falta, ya que la acción home solo renderiza la página.
   def home
     if session[:user_id] == nil
       redirect_to login_path
+    else
+      
     end
   end
 
@@ -10,7 +14,6 @@ class SessionController < ApplicationController
   def login
   end
 
-  # No hace falta, ya que la acción login solo renderiza la página.
   def profile
     if session[:user_id] == nil
       redirect_to login_path
@@ -44,5 +47,43 @@ class SessionController < ApplicationController
   def destroy    
     session[:user_id] = nil         
     redirect_to root_path 
-  end  
+  end
+
+  def search
+    if session[:user_id] == nil
+      redirect_to login_path
+    else
+      @recipes = Recipe.all
+      @lists = List.where.not(name: "Mis Recetas")
+    end
+  end
+
+  def search_users
+    puts ("#{params} AA")
+    if(params[:username])
+      @users = User.where("username LIKE ?", "%" + params[:username] + "%")
+    else
+      @users = User.all
+    end
+    render json: @users, status: :ok
+  end
+
+  def search_lists
+    if(params[:list])
+      @lists = List.where("name LIKE ?", "%" + params[:list] + "%")
+    else
+      @lists = List.all
+    end
+    render json: @lists, status: :ok
+  end
+
+  def search_recipes
+    if(params[:recipe])
+      @recipes = Recipe.where("name LIKE ?", "%" + params[:recipe] + "%")
+    else
+      @recipes = Recipe.all
+    end
+    render json: @recipes, status: :ok
+  end
+
 end
