@@ -30,7 +30,12 @@ module Api
 
       # POST /ingredients or /ingredients.json
       def create
-        @ingredient = Ingredient.new(ingredient_params)
+        existe = Ingredient.find_by(name: ingredient_params[:name])
+        if (existe == nil)
+          @ingredient = Ingredient.new(ingredient_params)
+        else
+          @ingredient = existe
+        end
 
         respond_to do |format|
           if @ingredient.save
