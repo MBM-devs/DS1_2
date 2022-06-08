@@ -86,4 +86,19 @@ class SessionController < ApplicationController
     render json: @recipes, status: :ok
   end
 
+  def follow
+    if(params[:id_current] && params[:id_follow])
+      Following.create(follower: params[:id_current], followed: params[:id_follow])
+      redirect_to profile_path(:id => params[:id_follow])
+    end
+  end
+
+  def unfollow
+    if(params[:id_current] && params[:id_unfollow])
+      row = Following.find_by(follower: params[:id_current], followed: params[:id_unfollow])
+      Following.destroy(row.id)
+      redirect_to profile_path(:id => params[:id_unfollow])
+    end
+  end
+
 end

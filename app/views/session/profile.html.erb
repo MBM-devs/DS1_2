@@ -48,6 +48,19 @@
     <div class="wrap-span">
         <span>Correo electrónico: <%= @user.email %></span>
     </div>
+    <% if current_user.id != @user.id %>
+        <div class="wrap-span">
+            <% if is_following?(current_user.id, @user.id) %>
+                <%= link_to unfollow_path(:id_current => current_user.id, :id_unfollow => @user.id) do %>
+                    <i class='fas fa-user-minus'></i> dejar de seguir
+                <% end %>
+            <% else %>
+                <%= link_to follow_path(:id_current => current_user.id, :id_follow => @user.id) do %>
+                    <i class='fas fa-user-plus'></i> seguir
+                <% end %>
+            <% end %>
+        </div>
+    <% end %>
     <div class="wrap-sliders">
         <div class="slider" id="slider-listas">
             <h2>Mis listas</h2>
@@ -110,16 +123,15 @@
                                     <%= link_to profile_path(:id => followed.id) do %>
                                         <div><%= followed.username %></div>
                                     <% end %>
-                                    <!-- TODO: Funcionalidad seguir y dejar de seguir -->
                                     <% if current_user.id != followed.id %>
                                         <% if is_following?(current_user.id, followed.id) %>
-                                            <a href="#">
+                                            <%= link_to unfollow_path(:id_current => current_user.id, :id_unfollow => followed.id) do %>
                                                 <i class='fas fa-user-minus'></i>
-                                            </a>
+                                            <% end %>
                                         <% else %>
-                                            <a href="#">
+                                            <%= link_to follow_path(:id_current => current_user.id, :id_follow => followed.id) do %>
                                                 <i class='fas fa-user-plus'></i>
-                                            </a>
+                                            <% end %>
                                         <% end %>
                                     <% end %>
                                 </div>
@@ -145,16 +157,15 @@
                                     <%= link_to profile_path(:id => follower.id) do %>
                                         <div><%= follower.username %></div>
                                     <% end %>
-                                    <!-- TODO: Funcionalidad seguir y dejar de seguir -->
                                     <% if current_user.id != follower.id %>
                                         <% if is_following?(current_user.id, follower.id) %>
-                                            <a href="#">
+                                            <%= link_to unfollow_path(:id_current => current_user.id, :id_unfollow => follower.id) do %>
                                                 <i class='fas fa-user-minus'></i>
-                                            </a>
+                                            <% end %>
                                         <% else %>
-                                            <a href="#">
+                                            <%= link_to follow_path(:id_current => current_user.id, :id_follow => follower.id) do %>
                                                 <i class='fas fa-user-plus'></i>
-                                            </a>
+                                            <% end %>
                                         <% end %>
                                     <% end %>
                                 </div>

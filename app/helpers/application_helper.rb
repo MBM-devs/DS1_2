@@ -97,7 +97,7 @@ module ApplicationHelper
         for id in followings do
             @followings_ids.push(id.followed)
         end
-        return Post.where("posts.user_id IN (?)", @followings_ids)
+        return Post.where("posts.user_id IN (?)", @followings_ids).order("created_at DESC")
     end
 
     def username(user_id)

@@ -13,6 +13,10 @@ Rails.application.routes.draw do
    post 'search_users', :to => 'session#search_users'
    post 'search_lists', :to => 'session#search_lists'
    post 'search_recipes', :to => 'session#search_recipes'
+   get 'follow', :to => 'session#follow'
+   get 'follow/:id_current/:id_unfollow', :to => 'session#follow'
+   get 'unfollow', :to => 'session#unfollow'
+   get 'unfollow/:id_current/:id_unfollow', :to => 'session#unfollow'
 
   root  'session#home'
 
