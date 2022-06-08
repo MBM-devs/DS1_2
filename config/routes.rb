@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' }  do
     namespace :v1 do
       post 'login', :to =>  'login#create'
+      post 'rating', :to =>  'recipes#rating'
       resources :posts
       resources :ratings
       resources :comments
