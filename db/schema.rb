@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_07_111400) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_08_125314) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "text"
@@ -59,6 +59,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_111400) do
     t.bigint "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["following_id"], name: "fk_rails_ff6d4a88cb"
+    t.index ["list_id"], name: "fk_rails_d8eac3145b"
+    t.index ["recipe_id"], name: "fk_rails_825b6944f3"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -142,7 +145,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_111400) do
   add_foreign_key "followed_lists", "users"
   add_foreign_key "followings", "users", column: "followed", name: "followed_fk"
   add_foreign_key "followings", "users", column: "follower", name: "follower_fk"
-  add_foreign_key "lists", "users"
+  add_foreign_key "lists", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "posts", "followings", on_delete: :cascade
+  add_foreign_key "posts", "lists", on_delete: :cascade
+  add_foreign_key "posts", "recipes", on_delete: :cascade
   add_foreign_key "posts", "users"
   add_foreign_key "ratings", "recipes"
   add_foreign_key "ratings", "users"
