@@ -106,6 +106,7 @@
                     <div class="wrap-li">
                         <li>
                             <div class="wrap-imagen-info">
+                                
                                 <div class="imagen-li">
                                     <%= image_tag recipe.url_img %>
                                 </div>
@@ -114,6 +115,17 @@
                                     <div><i class='fas fa-users'></i> <%= recipe.people %></div>
                                     <div><i class='fas fa-clock'></i> <%= recipe.duration %> min</div>
                                     <div><i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_recipe(recipe.id)) %></div>
+                                    <div>
+                                        <% if is_recipe_saved?(current_user.id, recipe.id) %>
+                                            <%= link_to unsave_recipe_path(:id_user => current_user.id, :id_recipe => recipe.id) do %>
+                                                <i class='fas fa-minus'></i>
+                                            <% end %>
+                                        <% else %>
+                                            <%= link_to save_recipe_path(:id_user => current_user.id, :id_recipe => recipe.id) do %>
+                                                <i class='fas fa-plus'></i>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
                                 </div>
                             </div>
                         </li>
