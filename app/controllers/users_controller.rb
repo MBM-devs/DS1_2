@@ -39,6 +39,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id # establece la sesión
         List.create(name: "Recetas de #{@user.username}", user_id:@user.id);
+        List.create(name: "Recetas Guardadas", user_id:@user.id);
         # format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.html { redirect_to root_path, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
