@@ -24,6 +24,21 @@ module Api
         @recipe = Recipe.new
       end
 
+    def rating
+      @rating = 0.0;
+      ratings = Rating.where(recipe_id: params[:id])
+      if(ratings.count > 0)
+          for entry in ratings do
+              @rating += entry.rating
+          end
+          @rating /= ratings.count
+      end
+      message = {"rating": "#{@rating}"}
+      respond_to do |format|
+        format.json { render json: message }
+      end
+    end
+
       # GET /recipes/1/edit
       def edit
       end
