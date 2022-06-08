@@ -34,8 +34,9 @@ module Api
 
         respond_to do |format|
           if @step.save
-            format.html { redirect_to step_url(@step), notice: "Step was successfully created." }
-            format.json { render :show, status: :created, location: @step }
+            # format.html { redirect_to step_url(@step), notice: "Step was successfully created." }
+            # format.json { render :show, status: :created, location: @step }
+            format.json { render "steps/show", status: :created, location: @step }
           else
             format.html { render :new, status: :unprocessable_entity }
             format.json { render json: @step.errors, status: :unprocessable_entity }
