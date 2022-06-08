@@ -139,4 +139,10 @@ module ApplicationHelper
         List.find_by_id(id)
     end
 
+    def is_recipe_saved?(user_id, recipe_id)
+        list = List.find_by(user_id: user_id, name: "Recetas Guardadas")
+        is_saved = RecipesList.find_by(list_id: list.id, recipe_id: recipe_id)
+        return is_saved != nil
+    end
+
 end

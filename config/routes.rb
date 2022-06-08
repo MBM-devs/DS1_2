@@ -21,6 +21,10 @@ Rails.application.routes.draw do
    get 'follow_list/:id_current/:id_unfollow', :to => 'session#follow_list'
    get 'unfollow_list', :to => 'session#unfollow_list'
    get 'unfollow_list/:id_current/:id_unfollow', :to => 'session#unfollow_list'
+   get 'save_recipe', :to => 'session#save_recipe'
+   get 'save_recipe/:id_user/:id_recipe', :to => 'session#save_recipe'
+   get 'unsave_recipe', :to => 'session#unsave_recipe'
+   get 'unsave_recipe/:id_user/:id_recipe', :to => 'session#unsave_recipe'
 
   root  'session#home'
 
