@@ -25,6 +25,10 @@ Rails.application.routes.draw do
    get 'save_recipe/:id_user/:id_recipe', :to => 'session#save_recipe'
    get 'unsave_recipe', :to => 'session#unsave_recipe'
    get 'unsave_recipe/:id_user/:id_recipe', :to => 'session#unsave_recipe'
+   get 'rate', :to => 'ratings#new'
+   get 'rate/:recipe_id', :to => 'ratings#new'
+   get 'rate_recipe', :to => 'session#rate'
+   get 'rate/:recipe_id', :to => 'session#rate'
 
   root  'session#home'
 

@@ -91,6 +91,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="centrar">
+                    <%= link_to rate_path(:recipe_id => recipe.id) do %>
+                        Valorar
+                    <% end %>
+                </div>
             </li>
         </div>
         <% end %>
