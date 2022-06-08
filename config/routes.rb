@@ -9,6 +9,10 @@ Rails.application.routes.draw do
    get 'logout', :to => 'session#destroy'
    get 'profile', :to => 'session#profile'
    get 'profile/:id' => 'session#profile'
+   get 'search', :to => 'session#search'
+   post 'search_users', :to => 'session#search_users'
+   post 'search_lists', :to => 'session#search_lists'
+   post 'search_recipes', :to => 'session#search_recipes'
 
   root  'session#home'
 

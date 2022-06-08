@@ -22,6 +22,7 @@
                 <nav>
                     <ul>
                         <% if logged_in? %>
+                            <li class="navbar-section"> <%= link_to "Buscar", search_path %> </li>
                             <li class="navbar-section"> <%= link_to "Ver perfil", profile_path %> </li>
                             <li class="navbar-section"> <%= link_to "Cerrar sesión", logout_path %> </li>
                         <% else %>

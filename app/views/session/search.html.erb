@@ -1,0 +1,73 @@
+<div class="centrar">
+    <div class="search-options">
+        <div class="option active" id="link-usuarios">Usuarios</div>
+        <div class="option" id="link-listas">Listas</div>
+        <div class="option" id="link-recetas">Recetas</div>
+    </div>
+</div>
+<div id="search-usuarios-div">
+    <div class="centrar">
+        <div class="wrap-search-bar">
+            <div class="search-input"><input id="search-usuarios-input" type="text" placeholder="Buscar usuario..."></div>
+            <div class="search-icon"><i class="fa fa-search"></i></div>
+        </div>
+    </div>
+    <ul class="resultados" id="usuarios-result">
+    </ul>
+</div>
+<div id="search-listas-div" class="hidden">
+    <div class="centrar">
+        <div class="wrap-search-bar">
+            <div class="search-input"><input id="search-listas-input" type="text" placeholder="Buscar lista..."></div>
+            <div class="search-icon"><i class="fa fa-search"></i></div>
+        </div>
+    </div>
+    <ul id="listas-result" class="resultados">
+        <% @lists.each do |list| %>
+        <div class="wrap-li hidden" id="<%= list.id %>">
+            <li>
+                <div class="wrap-list-stats">
+                    <div class="wrap-stat justify-left">
+                        <i class='fas fa-book'></i> <span class="list-name"><%= list.name %></span>
+                        <span class="list-id hidden"><%= list.id %></span>
+                    </div>
+                    <div class="wrap-stat justify-center">
+                        <i class='fas fa-utensils'></i>  <%= recipes_from_list(list.id).count %>
+                    </div>
+                    <div class="wrap-stat justify-right">
+                        <i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_list(list.id)) %>
+                    </div>
+                </div>
+            </li>
+        </div>
+        <% end %>
+    </ul>
+</div>
+<div id="search-recetas-div" class="hidden">
+    <div class="centrar">
+        <div class="wrap-search-bar">
+            <div class="search-input"><input id="search-recetas-input" type="text" placeholder="Buscar receta..."></div>
+            <div class="search-icon"><i class="fa fa-search"></i></div>
+        </div>
+    </div>
+    <ul class="resultados" id="recetas-result">
+        <% @recipes.each do |recipe| %>
+        <div class="wrap-li hidden" id="<%= recipe.name %>" >
+            <li>
+                <div class="wrap-imagen-info">
+                    <div class="imagen-li">
+                        <%= image_tag recipe.url_img %>
+                    </div>
+                    <div class="wrap-info">
+                        <div class="recipe-name"><%= recipe.name %></div>
+                        <div><i class='fas fa-users'></i> <%= recipe.people %></div>
+                        <div><i class='fas fa-clock'></i> <%= recipe.duration %> min</div>
+                        <div><i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_recipe(recipe.id)) %></div>
+                    </div>
+                </div>
+            </li>
+        </div>
+        <% end %>
+    </ul>
+</div>
+<%= javascript_include_tag "search", "data-turbo-track": "reload" %>
