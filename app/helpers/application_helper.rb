@@ -71,4 +71,45 @@ module ApplicationHelper
         return is_following != nil
     end
 
+    def posts_from_user(user_id)
+        return Posts.where(user_id: user_id)
+    end
+
+    def post_type(post)
+        type = nil
+        if(post.recipe_id != nil)
+            if(post.list_id != nil)
+                type = "recipe_to_list"
+            else
+                type = "new_recipe"
+            end
+        elsif(post.list_id != nil) 
+            type = "new_list"
+        else
+            type = "follow"
+        end
+        return type
+    end
+
+    def posts_from_followings(user_id)
+        followings = Following.where(follower: user_id)
+        @followings_ids = []
+        for id in followings do
+            @followings_ids.push(id.followed)
+        end
+        return Post.where("posts.user_id IN (?)", @followings_ids)
+    end
+
+    def username(user_id)
+        return User.find_by_id(user_id).username
+    end
+
+    def recipe(id)
+        return Recipe.find_by_id(id)
+    end
+
+    def lista(id)
+        List.find_by_id(id)
+    end
+
 end

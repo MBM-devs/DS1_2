@@ -5,6 +5,8 @@ class SessionController < ApplicationController
   def home
     if session[:user_id] == nil
       redirect_to login_path
+    else
+      
     end
   end
 
