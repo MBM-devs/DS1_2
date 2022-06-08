@@ -42,6 +42,16 @@ module ApplicationHelper
         return List.where(user_id: user_id)  
     end
 
+    def is_my_list?(user_id, list_id)
+        is_my_list = List.find_by(user_id: user_id, id: list_id);
+        return is_my_list != nil
+    end
+
+    def is_following_list?(user_id, list_id)
+        is_following_list = FollowedList.find_by(user_id: user_id, list_id: list_id);
+        return is_following_list != nil
+    end
+
     def rating_from_recipe(recipe_id)
         @rating = 0.0;
         ratings = Rating.where(recipe_id: recipe_id)

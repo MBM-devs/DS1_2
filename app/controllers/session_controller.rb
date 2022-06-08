@@ -101,4 +101,19 @@ class SessionController < ApplicationController
     end
   end
 
+  def follow_list
+    if(params[:id_current] && params[:id_follow])
+      FollowedList.create(user_id: params[:id_current], list_id: params[:id_follow])
+      redirect_to root_path
+    end
+  end
+
+  def unfollow_list
+    if(params[:id_current] && params[:id_unfollow])
+      row = FollowedList.find_by(user_id: params[:id_current], list_id: params[:id_unfollow])
+      FollowedList.destroy(row.id)
+      redirect_to root_path
+    end
+  end
+
 end
