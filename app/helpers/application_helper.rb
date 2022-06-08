@@ -42,6 +42,33 @@ module ApplicationHelper
         return List.where(user_id: user_id)  
     end
 
+    def user_related_lists(user_id)
+        listas_usuario = List.where(user_id: user_id)
+        listas_seguidas = FollowedList.where(user_id: user_id)
+
+        id_listas = []
+
+        for lista in listas_usuario do
+            id_listas.push(lista.id)
+        end
+
+        for lista in listas_seguidas do
+            id_listas.push(lista.list_id)
+        end
+
+        return List.where("id IN (?)", id_listas)
+    end
+
+    def is_my_list?(user_id, list_id)
+        is_my_list = List.find_by(user_id: user_id, id: list_id);
+        return is_my_list != nil
+    end
+
+    def is_following_list?(user_id, list_id)
+        is_following_list = FollowedList.find_by(user_id: user_id, list_id: list_id);
+        return is_following_list != nil
+    end
+
     def rating_from_recipe(recipe_id)
         @rating = 0.0;
         ratings = Rating.where(recipe_id: recipe_id)
@@ -97,7 +124,7 @@ module ApplicationHelper
         for id in followings do
             @followings_ids.push(id.followed)
         end
-        return Post.where("posts.user_id IN (?)", @followings_ids)
+        return Post.where("posts.user_id IN (?)", @followings_ids).order("created_at DESC")
     end
 
     def username(user_id)
@@ -110,6 +137,12 @@ module ApplicationHelper
 
     def lista(id)
         List.find_by_id(id)
+    end
+
+    def is_recipe_saved?(user_id, recipe_id)
+        list = List.find_by(user_id: user_id, name: "Recetas Guardadas")
+        is_saved = RecipesList.find_by(list_id: list.id, recipe_id: recipe_id)
+        return is_saved != nil
     end
 
 end

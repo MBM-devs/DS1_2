@@ -7,7 +7,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "base" %>
-    <%# javascript_include_tag "https://kit.fontawesome.com/a076d05399.js", "crossorigin": "anonymus", "data-turbo-track": "reload" %> 
     <%= javascript_include_tag "https://kit.fontawesome.com/35f230cea2.js", "crossorigin": "anonymus", "data-turbo-track": "reload" %> 
 </head>
 
@@ -37,6 +36,10 @@
         <div class="main-container">
             <div class="lateral">
                 <div class="content">
+                    <h1>Descarga nuestra app!</h1>
+                    <div class="centrar">
+                        <%= image_tag "/qr-code.png", :class => "qr" %>
+                    </div>
                 </div>
             </div>
             <div class="central">

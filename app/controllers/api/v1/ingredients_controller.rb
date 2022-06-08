@@ -34,9 +34,9 @@ module Api
 
         respond_to do |format|
           if @ingredient.save
-            # format.html { redirect_to ingredient_url(@ingredient), notice: "Ingredient was successfully created." }
-            format.json { render "ingredients/show", status: :created, location: @ingredient }
-            # format.json { render :show, status: :created, location: @ingredient }
+             # format.html { redirect_to ingredient_url(@ingredient), notice: "Ingredient was successfully created." }
+             format.json { render "ingredients/show", status: :created, location: @ingredient }
+             # format.json { render :show, status: :created, location: @ingredient }
           else
             format.html { render :new, status: :unprocessable_entity }
             format.json { render json: @ingredient.errors, status: :unprocessable_entity }

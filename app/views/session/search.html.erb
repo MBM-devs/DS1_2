@@ -38,6 +38,21 @@
                         <i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_list(list.id)) %>
                     </div>
                 </div>
+                <div class="wrap-list-stats">
+                    <div class="wrap-stat justify-left">
+                        <% if !is_my_list?(current_user.id, list.id) %>
+                            <% if is_following_list?(current_user.id, list.id) %>
+                                <%= link_to unfollow_list_path(:id_current => current_user.id, :id_unfollow => list.id) do %>
+                                    <i class='fas fa-minus'></i> dejar de seguir lista
+                                <% end %>
+                            <% else %>
+                                <%= link_to follow_list_path(:id_current => current_user.id, :id_follow => list.id) do %>
+                                    <i class='fas fa-plus'></i> seguir lista
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
             </li>
         </div>
         <% end %>

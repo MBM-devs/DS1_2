@@ -4,16 +4,24 @@
     <% posts_from_followings(current_user.id).each do |post| %>
         <div class="wrap-publicacion">
             <div class="wrap-imagen-info">
+                <%= link_to profile_path(:id => post.user_id) do %>
                 <div class="imagen-perfil">
                     <%= username(post.user_id)[0].upcase %>
                 </div>
+                <% end %>
                 <% case post_type(post)  
                     when "new_recipe" %>
                         <div class="wrap-follow-button">
-                            <div><%= username(post.user_id) %> ha creado una nueva receta</div>
-                            <a href="#">
-                                <i class='fas fa-plus'></i>
-                            </a>
+                            <div><%= link_to profile_path(:id => post.user_id) do %> <%= username(post.user_id) %><% end %> ha creado una nueva receta</div>
+                            <% if is_recipe_saved?(current_user.id, post.recipe_id) %>
+                                <%= link_to unsave_recipe_path(:id_user => current_user.id, :id_recipe => post.recipe_id) do %>
+                                    <i class='fas fa-minus'></i>
+                                <% end %>
+                            <% else %>
+                                <%= link_to save_recipe_path(:id_user => current_user.id, :id_recipe => post.recipe_id) do %>
+                                    <i class='fas fa-plus'></i>
+                                <% end %>
+                            <% end %>
                         </div>
                     </div>
                     <div class="wrap-imagen-info">
@@ -29,10 +37,18 @@
 
                     <% when "new_list" %>
                         <div class="wrap-follow-button">
-                            <div><%= username(post.user_id) %> ha creado una nueva lista</div>
-                            <a href="#">
-                                <i class='fas fa-plus'></i>
-                            </a>
+                            <div><%= link_to profile_path(:id => post.user_id) do %> <%= username(post.user_id) %><% end %> ha creado una nueva lista</div>
+                            <% if current_user.id != post.following_id %>
+                                <% if is_following_list?(current_user.id, post.list_id) %>
+                                    <%= link_to unfollow_list_path(:id_current => current_user.id, :id_unfollow => post.list_id) do %>
+                                        <i class='fas fa-minus'></i>
+                                    <% end %>
+                                <% else %>
+                                    <%= link_to follow_list_path(:id_current => current_user.id, :id_follow => post.list_id) do %>
+                                        <i class='fas fa-plus'></i>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
                         </div>
                     </div>
                     <div class="wrap-list-stats">
@@ -48,7 +64,7 @@
                            
                     <% when "recipe_to_list" %>
                             <div class="wrap-follow-button">
-                                <div><%= username(post.user_id) %> ha añadido una receta a la lista <%= lista(post.list_id).name %></div>
+                                <div><%= link_to profile_path(:id => post.user_id) do %> <%= username(post.user_id) %><% end %> ha añadido una receta a la lista <%= lista(post.list_id).name %></div>
                                 <a href="#">
                                     <i class='fas fa-plus'></i>
                                 </a>
@@ -65,20 +81,20 @@
                                 <div><i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_recipe(post.recipe_id)) %></div>
                             </div>
                     <% when "follow" %>
-                    
                         <div class="wrap-follow-button">
-                            <div><%= username(post.user_id) %> ha comenzado a seguir a <%= username(post.following_id) %></div>
-                            <% if is_following?(current_user.id, post.following_id) %>
-                                <a href="#">
-                                    <i class='fas fa-user-minus'></i>
-                                </a>
-                            <% else %>
-                                <a href="#">
-                                    <i class='fas fa-user-plus'></i>
-                                </a>
+                            <div><%= link_to profile_path(:id => post.user_id) do %> <%= username(post.user_id) %><% end %> ha comenzado a seguir a <%= link_to profile_path(:id => post.following_id) do %><%= username(post.following_id) %><% end %></div>
+                            <% if current_user.id != post.following_id %>
+                                <% if is_following?(current_user.id, post.following_id) %>
+                                    <%= link_to unfollow_path(:id_current => current_user.id, :id_unfollow => post.following_id) do %>
+                                        <i class='fas fa-user-minus'></i>
+                                    <% end %>
+                                <% else %>
+                                    <%= link_to follow_path(:id_current => current_user.id, :id_follow => post.following_id) do %>
+                                        <i class='fas fa-user-plus'></i>
+                                    <% end %>
+                                <% end %>
                             <% end %>
                         </div>
-                        
                 <% end %>
             </div>
         </div>

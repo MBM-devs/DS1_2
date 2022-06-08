@@ -24,7 +24,7 @@ class SessionController < ApplicationController
         @user = User.find_by(id: session[:user_id])
       end
     
-      @mis_recetas = List.find_by(user_id: @user.id, name: "Mis Recetas")
+      @mis_recetas = List.find_by(user_id: @user.id, name: "Recetas de #{@user.username}")
       # redirect_to user_path(session[:user_id])
     end
   end
@@ -59,7 +59,6 @@ class SessionController < ApplicationController
   end
 
   def search_users
-    puts ("#{params} AA")
     if(params[:username])
       @users = User.where("username LIKE ?", "%" + params[:username] + "%")
     else
@@ -84,6 +83,53 @@ class SessionController < ApplicationController
       @recipes = Recipe.all
     end
     render json: @recipes, status: :ok
+  end
+
+  def follow
+    if(params[:id_current] && params[:id_follow])
+      Following.create(follower: params[:id_current], followed: params[:id_follow])
+      redirect_to request.referer
+    end
+  end
+
+  def unfollow
+    if(params[:id_current] && params[:id_unfollow])
+      row = Following.find_by(follower: params[:id_current], followed: params[:id_unfollow])
+      Following.destroy(row.id)
+      redirect_to request.referer
+    end
+  end
+
+  def follow_list
+    if(params[:id_current] && params[:id_follow])
+      FollowedList.create(user_id: params[:id_current], list_id: params[:id_follow])
+      redirect_to request.referer
+    end
+  end
+
+  def unfollow_list
+    if(params[:id_current] && params[:id_unfollow])
+      row = FollowedList.find_by(user_id: params[:id_current], list_id: params[:id_unfollow])
+      FollowedList.destroy(row.id)
+      redirect_to request.referer
+    end
+  end
+
+  def save_recipe
+    if(params[:id_user] && params[:id_recipe])
+      list = List.find_by(user_id: params[:id_user], name: "Recetas Guardadas")
+      RecipesList.create(list_id: list.id, recipe_id: params[:id_recipe])
+      redirect_to request.referer
+    end
+  end
+
+  def unsave_recipe
+    if(params[:id_user] && params[:id_recipe])
+      list = List.find_by(user_id: params[:id_user], name: "Recetas Guardadas")
+      receta_guardada = RecipesList.find_by(list_id: list.id, recipe_id: params[:id_recipe])
+      RecipesList.destroy(receta_guardada.id)
+      redirect_to request.referer
+    end
   end
 
 end
