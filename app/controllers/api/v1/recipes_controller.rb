@@ -38,7 +38,7 @@ module Api
           respond_to do |format|
             if @recipe.save
               Post.create(user_id: recipe_params[:user_id], recipe_id: @recipe.id)
-              @mis_recetas = List.find_by(user_id: recipe_params[:user_id], name: "Recetas de #{@user.username}" );
+              @mis_recetas = List.find_by(user_id: recipe_params[:user_id], name: 'Mis Recetas');
               
               RecipesList.create(list_id: @mis_recetas.id, recipe_id: @recipe.id);
               if(recipe_params[:list_id] != nil)
