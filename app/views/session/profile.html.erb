@@ -11,7 +11,8 @@
         </div>
         <div class="estadistica" id="link-listas">
             <div class="estadistica-numero">
-                <%= lists_from_user(@user.id).count %>
+                <!-- -1 porque no mostramos las listas de guardados (son privadas) -->
+                <%= lists_from_user(@user.id).count - 1 %>
             </div>
             <div class="estadistica-titulo">
                 Listas
