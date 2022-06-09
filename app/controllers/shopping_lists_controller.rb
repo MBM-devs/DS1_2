@@ -3,24 +3,39 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists or /shopping_lists.json
   def index
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @shopping_lists = ShoppingList.all
   end
 
   # GET /shopping_lists/1 or /shopping_lists/1.json
   def show
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # GET /shopping_lists/new
   def new
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @shopping_list = ShoppingList.new
   end
 
   # GET /shopping_lists/1/edit
   def edit
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # POST /shopping_lists or /shopping_lists.json
   def create
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @shopping_list = ShoppingList.new(shopping_list_params)
 
     respond_to do |format|
@@ -36,6 +51,9 @@ class ShoppingListsController < ApplicationController
 
   # PATCH/PUT /shopping_lists/1 or /shopping_lists/1.json
   def update
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     respond_to do |format|
       if @shopping_list.update(shopping_list_params)
         format.html { redirect_to shopping_list_url(@shopping_list), notice: "Shopping list was successfully updated." }
@@ -49,6 +67,9 @@ class ShoppingListsController < ApplicationController
 
   # DELETE /shopping_lists/1 or /shopping_lists/1.json
   def destroy
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @shopping_list.destroy
 
     respond_to do |format|

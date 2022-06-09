@@ -3,24 +3,39 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients or /ingredients.json
   def index
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @ingredients = Ingredient.all
   end
 
   # GET /ingredients/1 or /ingredients/1.json
   def show
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # GET /ingredients/new
   def new
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @ingredient = Ingredient.new
   end
 
   # GET /ingredients/1/edit
   def edit
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # POST /ingredients or /ingredients.json
   def create
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @ingredient = Ingredient.new(ingredient_params)
 
     respond_to do |format|
@@ -36,6 +51,9 @@ class IngredientsController < ApplicationController
 
   # PATCH/PUT /ingredients/1 or /ingredients/1.json
   def update
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     respond_to do |format|
       if @ingredient.update(ingredient_params)
         format.html { redirect_to ingredient_url(@ingredient), notice: "Ingredient was successfully updated." }
@@ -49,6 +67,9 @@ class IngredientsController < ApplicationController
 
   # DELETE /ingredients/1 or /ingredients/1.json
   def destroy
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @ingredient.destroy
 
     respond_to do |format|

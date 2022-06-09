@@ -4,24 +4,39 @@ class FollowingsController < ApplicationController
 
   # GET /followings or /followings.json
   def index
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @followings = Following.all
   end
 
   # GET /followings/1 or /followings/1.json
   def show
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # GET /followings/new
   def new
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @following = Following.new
   end
 
   # GET /followings/1/edit
   def edit
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # POST /followings or /followings.json
   def create
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @following = Following.new(following_params)
 
     respond_to do |format|
@@ -38,6 +53,9 @@ class FollowingsController < ApplicationController
 
   # PATCH/PUT /followings/1 or /followings/1.json
   def update
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     respond_to do |format|
       if @following.update(following_params)
         format.html { redirect_to following_url(@following), notice: "Following was successfully updated." }
@@ -51,6 +69,9 @@ class FollowingsController < ApplicationController
 
   # DELETE /followings/1 or /followings/1.json
   def destroy
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @following.destroy
 
     respond_to do |format|
