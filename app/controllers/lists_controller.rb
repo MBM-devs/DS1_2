@@ -3,24 +3,39 @@ class ListsController < ApplicationController
 
   # GET /lists or /lists.json
   def index
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @lists = List.all
   end
 
   # GET /lists/1 or /lists/1.json
   def show
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # GET /lists/new
   def new
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @list = List.new
   end
 
   # GET /lists/1/edit
   def edit
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # POST /lists or /lists.json
   def create
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @list = List.new(list_params)
 
     respond_to do |format|
@@ -36,6 +51,9 @@ class ListsController < ApplicationController
 
   # PATCH/PUT /lists/1 or /lists/1.json
   def update
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     respond_to do |format|
       if @list.update(list_params)
         format.html { redirect_to list_url(@list), notice: "List was successfully updated." }
@@ -49,6 +67,9 @@ class ListsController < ApplicationController
 
   # DELETE /lists/1 or /lists/1.json
   def destroy
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @list.destroy
 
     respond_to do |format|

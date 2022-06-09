@@ -3,24 +3,39 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @posts = Post.all
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # GET /posts/new
   def new
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @post = Post.new
   end
 
   # GET /posts/1/edit
   def edit
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # POST /posts or /posts.json
   def create
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @post = Post.new(post_params)
 
     respond_to do |format|
@@ -36,6 +51,9 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
@@ -49,6 +67,9 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @post.destroy
 
     respond_to do |format|

@@ -14,11 +14,11 @@ Rails.application.routes.draw do
    post 'search_lists', :to => 'session#search_lists'
    post 'search_recipes', :to => 'session#search_recipes'
    get 'follow', :to => 'session#follow'
-   get 'follow/:id_current/:id_unfollow', :to => 'session#follow'
+   get 'follow/:id_current/:id_follow', :to => 'session#follow'
    get 'unfollow', :to => 'session#unfollow'
    get 'unfollow/:id_current/:id_unfollow', :to => 'session#unfollow'
    get 'follow_list', :to => 'session#follow_list'
-   get 'follow_list/:id_current/:id_unfollow', :to => 'session#follow_list'
+   get 'follow_list/:id_current/:id_follow', :to => 'session#follow_list'
    get 'unfollow_list', :to => 'session#unfollow_list'
    get 'unfollow_list/:id_current/:id_unfollow', :to => 'session#unfollow_list'
    get 'save_recipe', :to => 'session#save_recipe'
@@ -27,8 +27,6 @@ Rails.application.routes.draw do
    get 'unsave_recipe/:id_user/:id_recipe', :to => 'session#unsave_recipe'
    get 'rate', :to => 'ratings#new'
    get 'rate/:recipe_id', :to => 'ratings#new'
-   get 'rate_recipe', :to => 'session#rate'
-   get 'rate/:recipe_id', :to => 'session#rate'
 
   root  'session#home'
 

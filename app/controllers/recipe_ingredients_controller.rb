@@ -3,24 +3,39 @@ class RecipeIngredientsController < ApplicationController
 
   # GET /recipe_ingredients or /recipe_ingredients.json
   def index
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @recipe_ingredients = RecipeIngredient.all
   end
 
   # GET /recipe_ingredients/1 or /recipe_ingredients/1.json
   def show
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # GET /recipe_ingredients/new
   def new
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @recipe_ingredient = RecipeIngredient.new
   end
 
   # GET /recipe_ingredients/1/edit
   def edit
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # POST /recipe_ingredients or /recipe_ingredients.json
   def create
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @recipe_ingredient = RecipeIngredient.new(recipe_ingredient_params)
 
     respond_to do |format|
@@ -36,6 +51,9 @@ class RecipeIngredientsController < ApplicationController
 
   # PATCH/PUT /recipe_ingredients/1 or /recipe_ingredients/1.json
   def update
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     respond_to do |format|
       if @recipe_ingredient.update(recipe_ingredient_params)
         format.html { redirect_to recipe_ingredient_url(@recipe_ingredient), notice: "Recipe ingredient was successfully updated." }
@@ -49,6 +67,9 @@ class RecipeIngredientsController < ApplicationController
 
   # DELETE /recipe_ingredients/1 or /recipe_ingredients/1.json
   def destroy
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @recipe_ingredient.destroy
 
     respond_to do |format|

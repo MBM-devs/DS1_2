@@ -39,7 +39,7 @@ module Api
 
         respond_to do |format|
           if @ingredient.save
-            if(params[:recipe_id] != nil)
+            if(ingredient_params[:recipe_id] != nil)
               RecipeIngredient.create(recipe_id: ingredient_params[:recipe_id], ingredient_id: @ingredient.id, quantity: ingredient_params[:quantity], unit: ingredient_params[:unit])
             end
             # format.html { redirect_to ingredient_url(@ingredient), notice: "Ingredient was successfully created." }

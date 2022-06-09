@@ -3,11 +3,17 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @users = User.all
   end
 
   # GET /users/1 or /users/1.json
   def show
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @user = User.find(params[:id])      
     @mis_recetas = List.find_by(user_id: @user.id, name: "Mis Recetas")
     # url = URI("https://clados.ugr.es/DS1_2/api/v1/users/#{params[:id]}")
@@ -23,6 +29,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # POST /users or /users.json
@@ -53,6 +62,9 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
@@ -66,6 +78,9 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @user.destroy
 
     respond_to do |format|
