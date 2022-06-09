@@ -3,11 +3,17 @@ class RatingsController < ApplicationController
 
   # GET /ratings or /ratings.json
   def index
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @ratings = Rating.all
   end
 
   # GET /ratings/1 or /ratings/1.json
   def show
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # GET /ratings/new
@@ -20,6 +26,9 @@ class RatingsController < ApplicationController
 
   # GET /ratings/1/edit
   def edit
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # POST /ratings or /ratings.json
@@ -39,6 +48,9 @@ class RatingsController < ApplicationController
 
   # PATCH/PUT /ratings/1 or /ratings/1.json
   def update
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     respond_to do |format|
       if @rating.update(rating_params)
         format.html { redirect_to rating_url(@rating), notice: "Rating was successfully updated." }
@@ -52,6 +64,9 @@ class RatingsController < ApplicationController
 
   # DELETE /ratings/1 or /ratings/1.json
   def destroy
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @rating.destroy
 
     respond_to do |format|

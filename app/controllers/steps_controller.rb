@@ -3,24 +3,39 @@ class StepsController < ApplicationController
 
   # GET /steps or /steps.json
   def index
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @steps = Step.all
   end
 
   # GET /steps/1 or /steps/1.json
   def show
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # GET /steps/new
   def new
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @step = Step.new
   end
 
   # GET /steps/1/edit
   def edit
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
   end
 
   # POST /steps or /steps.json
   def create
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @step = Step.new(step_params)
 
     respond_to do |format|
@@ -36,6 +51,9 @@ class StepsController < ApplicationController
 
   # PATCH/PUT /steps/1 or /steps/1.json
   def update
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     respond_to do |format|
       if @step.update(step_params)
         format.html { redirect_to step_url(@step), notice: "Step was successfully updated." }
@@ -49,6 +67,9 @@ class StepsController < ApplicationController
 
   # DELETE /steps/1 or /steps/1.json
   def destroy
+    if session[:user_id] == nil || User.find_by_id(session[:user_id]).username != "admin"
+      redirect_to root_path
+    end
     @step.destroy
 
     respond_to do |format|
