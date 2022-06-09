@@ -24,37 +24,39 @@
     </div>
     <ul id="listas-result" class="resultados">
         <% @lists.each do |list| %>
-        <div class="wrap-li hidden" id="<%= list.id %>">
-            <li>
-                <div class="wrap-list-stats">
-                    <div class="wrap-stat justify-left">
-                        <i class='fas fa-book'></i> <span class="list-name"><%= list.name %></span>
-                        <span class="list-id hidden"><%= list.id %></span>
-                    </div>
-                    <div class="wrap-stat justify-center">
-                        <i class='fas fa-utensils'></i>  <%= recipes_from_list(list.id).count %>
-                    </div>
-                    <div class="wrap-stat justify-right">
-                        <i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_list(list.id)) %>
-                    </div>
-                </div>
-                <div class="wrap-list-stats">
-                    <div class="wrap-stat justify-left">
-                        <% if !is_my_list?(current_user.id, list.id) %>
-                            <% if is_following_list?(current_user.id, list.id) %>
-                                <%= link_to unfollow_list_path(:id_current => current_user.id, :id_unfollow => list.id) do %>
-                                    <i class='fas fa-minus'></i> dejar de seguir lista
+            <% if list.name != "Recetas Guardadas" %>
+                <div class="wrap-li hidden" id="<%= list.id %>">
+                    <li>
+                        <div class="wrap-list-stats">
+                            <div class="wrap-stat justify-left">
+                                <i class='fas fa-book'></i> <span class="list-name"><%= list.name %></span>
+                                <span class="list-id hidden"><%= list.id %></span>
+                            </div>
+                            <div class="wrap-stat justify-center">
+                                <i class='fas fa-utensils'></i>  <%= recipes_from_list(list.id).count %>
+                            </div>
+                            <div class="wrap-stat justify-right">
+                                <i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_list(list.id)) %>
+                            </div>
+                        </div>
+                        <div class="wrap-list-stats">
+                            <div class="wrap-stat justify-left">
+                                <% if !is_my_list?(current_user.id, list.id) %>
+                                    <% if is_following_list?(current_user.id, list.id) %>
+                                        <%= link_to unfollow_list_path(:id_current => current_user.id, :id_unfollow => list.id) do %>
+                                            <i class='fas fa-minus'></i> dejar de seguir lista
+                                        <% end %>
+                                    <% else %>
+                                        <%= link_to follow_list_path(:id_current => current_user.id, :id_follow => list.id) do %>
+                                            <i class='fas fa-plus'></i> seguir lista
+                                        <% end %>
+                                    <% end %>
                                 <% end %>
-                            <% else %>
-                                <%= link_to follow_list_path(:id_current => current_user.id, :id_follow => list.id) do %>
-                                    <i class='fas fa-plus'></i> seguir lista
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                    </div>
+                            </div>
+                        </div>
+                    </li>
                 </div>
-            </li>
-        </div>
+            <% end %>
         <% end %>
     </ul>
 </div>
