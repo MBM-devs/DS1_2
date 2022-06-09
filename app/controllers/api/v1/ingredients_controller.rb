@@ -32,16 +32,19 @@ module Api
       def create
         existe = Ingredient.find_by(name: ingredient_params[:name])
         if (existe == nil)
-          @ingredient = Ingredient.new(ingredient_params)
+          @ingredient = Ingredient.new(name: ingredient_params[:name])
         else
           @ingredient = existe
         end
 
         respond_to do |format|
           if @ingredient.save
-             # format.html { redirect_to ingredient_url(@ingredient), notice: "Ingredient was successfully created." }
-             format.json { render "ingredients/show", status: :created, location: @ingredient }
-             # format.json { render :show, status: :created, location: @ingredient }
+            if(params[:recipe_id] != nil)
+              RecipeIngredient.create(recipe_id: ingredient_params[:recipe_id], ingredient_id: @ingredient.id, quantity: ingredient_params[:quantity], unit: ingredient_params[:unit])
+            end
+            # format.html { redirect_to ingredient_url(@ingredient), notice: "Ingredient was successfully created." }
+            format.json { render "ingredients/show", status: :created, location: @ingredient }
+            # format.json { render :show, status: :created, location: @ingredient }
           else
             format.html { render :new, status: :unprocessable_entity }
             format.json { render json: @ingredient.errors, status: :unprocessable_entity }
@@ -80,7 +83,7 @@ module Api
 
         # Only allow a list of trusted parameters through.
         def ingredient_params
-          params.require(:ingredient).permit(:name)
+          params.require(:ingredient).permit(:name, :quantity, :unit, :recipe_id)
         end
     end
   end

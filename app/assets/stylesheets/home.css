@@ -8,3 +8,12 @@
 .wrap-publicacion .wrap-imagen-info, .wrap-publicacion .wrap-list-stats {
     padding-bottom: 15px;
 }
+
+.wrap-follow-button a{
+    color: var(--primary-color);
+}
+
+.wrap-follow-button a:hover{
+    color: var(--secondary-color);
+    transition: 0.5s;
+}

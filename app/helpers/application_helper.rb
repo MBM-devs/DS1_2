@@ -10,6 +10,10 @@ module ApplicationHelper
         @current_user ||= User.find_by_id(session[:user_id]) if !!session[:user_id]
     end
 
+    def list(list_id)
+        list = List.where(id: list_id)
+    end
+
 
     def recipes_from_list(list_id)
         recipes_list = RecipesList.where(list_id: list_id)

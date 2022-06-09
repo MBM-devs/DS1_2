@@ -13,6 +13,9 @@
                     when "new_recipe" %>
                     <div class="wrap-follow-button">
                         <div><%= link_to profile_path(:id => post.user_id) do %> <%= username(post.user_id) %><% end %> ha creado una nueva receta</div>
+                            <%= link_to rate_path(:recipe_id => post.recipe_id) do %>
+                                Valorar
+                            <% end %>
                             <% if is_recipe_saved?(current_user.id, post.recipe_id) %>
                                 <%= link_to unsave_recipe_path(:id_user => current_user.id, :id_recipe => post.recipe_id) do %>
                                     <i class='fas fa-minus'></i>
@@ -34,22 +37,25 @@
                             <div><i class='fas fa-clock'></i> <%= recipe(post.recipe_id).duration %> min</div>
                             <div><i class='fas fa-star'></i> <%= "%g" % ("%.2f" % rating_from_recipe(post.recipe_id)) %></div>
                         </div>
+                        
 
                     <% when "new_list" %>
-                        <div class="wrap-follow-button">
-                            <div><%= link_to profile_path(:id => post.user_id) do %> <%= username(post.user_id) %><% end %> ha creado una nueva lista</div>
-                            <% if current_user.id != post.following_id %>
-                                <% if is_following_list?(current_user.id, post.list_id) %>
-                                    <%= link_to unfollow_list_path(:id_current => current_user.id, :id_unfollow => post.list_id) do %>
-                                        <i class='fas fa-minus'></i>
-                                    <% end %>
-                                <% else %>
-                                    <%= link_to follow_list_path(:id_current => current_user.id, :id_follow => post.list_id) do %>
-                                        <i class='fas fa-plus'></i>
+                        <% if list(post.list_id).name != "Recetas Guardadas" %>
+                            <div class="wrap-follow-button">
+                                <div><%= link_to profile_path(:id => post.user_id) do %> <%= username(post.user_id) %><% end %> ha creado una nueva lista</div>
+                                <% if current_user.id != post.following_id %>
+                                    <% if is_following_list?(current_user.id, post.list_id) %>
+                                        <%= link_to unfollow_list_path(:id_current => current_user.id, :id_unfollow => post.list_id) do %>
+                                            <i class='fas fa-minus'></i>
+                                        <% end %>
+                                    <% else %>
+                                        <%= link_to follow_list_path(:id_current => current_user.id, :id_follow => post.list_id) do %>
+                                            <i class='fas fa-plus'></i>
+                                        <% end %>
                                     <% end %>
                                 <% end %>
-                            <% end %>
-                        </div>
+                            </div>
+                        <% end %>
                     </div>
                     <div class="wrap-list-stats">
                         <div class="wrap-stat justify-left">
