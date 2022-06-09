@@ -35,8 +35,9 @@ module Api
         respond_to do |format|
           if @list.save
             Post.create(user_id: list_params[:user_id], list_id: @list.id)
-            format.html { redirect_to list_url(@list), notice: "List was successfully created." }
-            format.json { render :show, status: :created, location: @list }
+            format.json { render "lists/show", status: :created, location: @list }
+            # format.html { redirect_to list_url(@list), notice: "List was successfully created." }
+            # format.json { render :show, status: :created, location: @list }
           else
             format.html { render :new, status: :unprocessable_entity }
             format.json { render json: @list.errors, status: :unprocessable_entity }
